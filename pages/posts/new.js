@@ -30,9 +30,7 @@ const NewPost = () =>{
             body: JSON.stringify(newPost)
         });
         let data = await response.json();
-        const datadata = JSON.stringify(data.data);
-        const justdata = JSON.stringify(data)
-        console.log("after data: "  + datadata+ " ::: " + justdata );
+
         if(data){
             setTitle('');
             setBody('');
@@ -46,7 +44,7 @@ const NewPost = () =>{
 
 
     return (
-    <div className="h-screen w-screen flex justify-center items-center">
+    <div className="h-screen w-screen flex flex-col justify-center items-center">
         <div className='container'>
             {flashError ? (
                 <h4>{flashError}</h4>

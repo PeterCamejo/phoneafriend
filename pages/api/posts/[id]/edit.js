@@ -1,5 +1,5 @@
-import connectDB from "../../lib/mongodb";
-import Post from "../../models/Post"
+import connectDB from "../../../lib/mongodb";
+import Post from "../../../models/Post"
 
 export default async function handler(req,res){
     const {method} = req;
@@ -29,23 +29,25 @@ export default async function handler(req,res){
                 let id = JSON.parse(req.body);
                 await Post.findByIdAndDelete(id);
                 //res.redirect('/')
-                res.status(200).json({success:true, data:"Succesfully deleted."})
+                res.status(200).json({success:true, data:"Successfully deleted."})
                 
             }catch(error){
                 res.status(400).json({success:false})
             }
             break;
         case 'PUT':
-                try{
-                    let post = JSON.parse(req.body);
-                    await Post.findByIdAndUpdate(post.id,{title: post.title, body: post.body});
-                    res.status(200).json({success:true, data:'Successfully updated!'})
-                }catch(error){
-                    res.status(400).json({success:false})
-                }
-                break;
-            default:
+            try{
+                console.log('here 1');
+                let post = JSON.parse(req.body);
+                console.log('here 2');
+                await Post.findByIdAndUpdate(post.id,{title: post.title, body: post.body});
+                res.status(200).json({success:true, data:'Successfully updated!'})
+            }catch(error){
                 res.status(400).json({success:false})
-                break
+            }
+            break;
+        default:
+            res.status(400).json({success:false})
+            break
     }
 }

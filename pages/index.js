@@ -14,7 +14,9 @@ export default function Home() {
   return (
     <div className='h-screen w-screen flex flex-col items-center justify-center'> 
      <Link href="/posts/new">
-      <button className='p=3'>Create New Post</button>
+      <button className='p=3 border-solid border-2 border-black'>
+        Create New Post
+      </button>
      </Link> 
       
       <div className='container border-2 border-solid border-black'>

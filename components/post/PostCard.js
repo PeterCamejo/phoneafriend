@@ -9,13 +9,14 @@ const PostCard = (props) =>{
                     query:{
                         title:post.title,
                         author:post.author,
-                        body: post.body}
+                        body: post.body,
+                        id: post._id
+                    }
                         
                         }}>
             <div className="container flex flex-row w-full border-2 border-black border-solid">'
                 <h2>{post.title}</h2>
-                <h4>{post.author}</h4>
-                <p>{post.body}</p>
+                <h4 className="mx-3">{post.author}</h4>
             </div>
         </Link>
     )
