@@ -36,7 +36,7 @@ function ShowPost(props) {
         <div className="flex flex-col justify-center border-2 border-solid border-black items-center h-screen w-screen">
             <PostBody post={props.post} />
           {/* <Comments id={id}/>  */}
-        <div>
+        <div className="container space-x-4 mt-3">
             <button className="p-3 border-solid  border-2 border-black"onClick={handleDelete}>
                 Delete Post
             </button>

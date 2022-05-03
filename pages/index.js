@@ -11,13 +11,16 @@ export default function Home() {
   useEffect(()=>{
     fetch('/api/posts').then((response) => response.json()).then((data)=> setData(data))
   }, [])
+  
   return (
     <div className='h-screen w-screen flex flex-col items-center justify-center'> 
-     <Link href="/posts/new">
-      <button className='p=3 border-solid border-2 border-black'>
-        Create New Post
-      </button>
-     </Link> 
+      <div className="container flex flex-row mb-3">
+        <Link href="/posts/new">
+          <button className='p-3 border-solid border-2 border-black'>
+            Create New Post
+          </button>
+        </Link> 
+      </div>
       
       <div className='container border-2 border-solid border-black'>
         {data ? data.data.map((thisData, index) => {

@@ -41,24 +41,27 @@ const EditPost = (props) => {
     }
      
     return(
-        <div className="h-screen w-screen flex justify-center items-center">
-            <Link href={{pathname: `/posts/${props.post.id}`,
-                  query:{
-                    title: props.post.title,
-                    author:props.post.author,
-                    body: props.post.body,
-                    id: props.post._id
-                  }
-            }}>
-                <button className="p-3 border-solid border-black border-2">
-                    Go Back
-                </button>
-            </Link>
-           <div className="container flex justify-center">
+        <div className="h-screen w-screen flex flex-col justify-center items-center">
+            <h1 className='underline mb-3'>Edit Post</h1>
+            <div className='container'>
+                <Link href={{pathname: `/posts/${props.post.id}`,
+                    query:{
+                        title: props.post.title,
+                        author:props.post.author,
+                        body: props.post.body,
+                        id: props.post._id
+                    }
+                }}>
+                    <button className="p-3 mb-3 border-solid border-black border-2">
+                        Go Back
+                    </button>
+                </Link>
+            </div>
+           <div className="container p-5 flex border-black border-2 border-solid justify-center">
                <form onSubmit={handleUpdate}>
                     <div className="mb-3">
                         <label>Title</label>
-                        <input className='border-solid border-black border-2'
+                        <input className='border-solid border-gray border-2'
                                name="title" 
                                type='text'
                                onChange={(e)=>{setTitle(e.target.value)}}
@@ -67,7 +70,7 @@ const EditPost = (props) => {
                     </div>
                     <div className="mb-3">
                         <label>Body</label>
-                        <textarea className='border-solid border-black border-2'
+                        <textarea className='border-solid border-gray border-2'
                                   name="body"
                                   onChange={(e)=>{setBody(e.target.value)}}
                                   value={body}

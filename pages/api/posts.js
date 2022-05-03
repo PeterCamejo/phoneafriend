@@ -1,6 +1,7 @@
 import connectDB from "../../lib/mongodb";
 import Post from "../../models/Post"
 
+
 export default async function handler(req,res){
     const {method} = req;
 
@@ -28,9 +29,8 @@ export default async function handler(req,res){
             try{
                 let id = JSON.parse(req.body);
                 await Post.findByIdAndDelete(id);
-                //res.redirect('/')
                 res.status(200).json({success:true, data:"Succesfully deleted."})
-                
+           
             }catch(error){
                 res.status(400).json({success:false})
             }
