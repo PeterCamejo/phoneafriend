@@ -9,7 +9,7 @@ const Comments = (props) =>{
         <div className="w-3/4 flex flex-col justify-center items-center border-solid border-2 border-black">
             {currentPost.comments.map((comment, index) =>{
                 return(
-                    <Comment author={comment.author} body={comment.body} />
+                    <Comment author={comment.author} key={index} body={comment.body} />
                 )
             })}
         </div>

@@ -73,7 +73,7 @@ const EditPost = (props) => {
                 <div className="container p-3 rounded-md flex border-black border-2 border-solid ">
                     <form className="w-full" onSubmit={handleUpdate}>
                             <div className="mb-3">
-                                <label for="title">Title</label>
+                                <label>Title</label>
                                 <input className='border-solid border-gray border-2 w-full'
                                     name="title" 
                                     type='text'

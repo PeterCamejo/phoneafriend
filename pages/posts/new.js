@@ -69,7 +69,7 @@ const NewPost = () =>{
             <div className='container p-3 flex rounded-md border-solid border-2 border-black'>
                 <form onSubmit={handlePost} className='w-full '>
                     <div className='mb-3'>
-                        <label for='title'>Title</label>
+                        <label>Title</label>
                         <input className='border-grey border-solid border-2 w-full'
                             name="title" 
                             type="text"
