@@ -17,8 +17,8 @@ export default function Home(props) {
     <div className='h-screen w-screen p-6 flex flex-col items-center justify-center'> 
       <div className='container h-1/3'>
           <h1>Phone A Friend</h1>
-          <p>Thanks for checking up on this project's progress!</p>
-          <p>Remember to check out the <a className='text-sky-400 underline' href="https://github.com/PeterCamejo/phoneafriend"> Github repo</a> to see what features I've already implemented and the features I'm currently working on.</p>
+          <p>Thanks for checking up on this project&apos;s progress!</p>
+          <p>Remember to check out the <a className='text-sky-400 underline' href="https://github.com/PeterCamejo/phoneafriend"> Github repo</a> to see what features I&apos;ve already implemented and the features I&apos;m currently working on.</p>
       </div>
       <div className='container h-2/3'>
         {flashSuccess ? 
