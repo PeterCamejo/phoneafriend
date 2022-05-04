@@ -4,7 +4,7 @@
 *         message, 
 *         type  // 'success' or 'error' only. Determines flash 
 *         message background color.
-*
+*   }
 */
 
 
