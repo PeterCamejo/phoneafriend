@@ -6,13 +6,16 @@ import PostBody from "../../components/post/PostBody"
 
 
 function ShowPost(props) {
+    const router = useRouter();
+    const [flashError , setFlashError] = useState('');
+    const [flashSuccess, setFlashSuccess] = useState(props.flash);
     
     const handleDelete = async (e) =>{
         e.preventDefault();
 
-        // setFlashError('');
-        // setFlashSuccess('');
-        console.log(props.post.id);
+        setFlashError('');
+        setFlashSuccess('');
+  
     
         let response = await fetch('/api/posts', {
             method: 'DELETE',
@@ -20,24 +23,29 @@ function ShowPost(props) {
         });
         let data = await response.json();
 
-        return
+        if(data){
+            return router.push({
+                                pathname:"/",
+                                query: { flash : data.data },
+            });
 
-        // if(data){
-        //     setTitle('');
-        //     setBody('');
-
-        //     return setFlashSuccess(data.data);
-        // }else{
-        //     return setFlashError("An Error has occured");
-        // }
+        }else{
+            return setFlashError("An Error has occured");
+        }
     }
 
     return(
         <div className="flex flex-col justify-center border-2 border-solid border-black items-center h-screen w-screen">
+            {flashSuccess ? 
+                <div>{flashSuccess}</div> : null}
+            {flashError ?
+                <div>{flashError}</div> : null}
             <PostBody post={props.post} />
           {/* <Comments id={id}/>  */}
+
+          {/* //TODO: Make Delete and Edit buttons a OwnerButtons components */}
         <div className="container space-x-4 mt-3">
-            <button className="p-3 border-solid  border-2 border-black"onClick={handleDelete}>
+            <button className="p-3 border-solid rounded-md border-2 border-black"onClick={handleDelete}>
                 Delete Post
             </button>
             <Link href={{pathname: `/posts/${props.post.id}/edit`,
@@ -48,7 +56,7 @@ function ShowPost(props) {
                     id: props.post._id
                   }
             }}>
-                <button className="p-3 border-solid border-2 border-black">
+                <button className="p-3 rounded-md border-solid border-2 border-black">
                     Edit Post
                 </button>
             </Link>
@@ -59,6 +67,7 @@ function ShowPost(props) {
 }
 
 export async function getServerSideProps(context) {
+    let flash = context.query.flash ? context.query.flash : "";
     let post = {
         title: context.query.title,
         author: context.query.author,
@@ -67,7 +76,8 @@ export async function getServerSideProps(context) {
     }
     return{
         props:{
-            post:post
+            post:post,
+            flash:flash
         }
     }
 }

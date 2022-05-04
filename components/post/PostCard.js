@@ -14,9 +14,9 @@ const PostCard = (props) =>{
                     }
                         
                         }}>
-            <div className="container flex flex-row w-full border-2 border-black border-solid">'
-                <h2>{post.title}</h2>
-                <h4 className="mx-3">{post.author}</h4>
+            <div className="container p-3 shadow-lg flex flex-row w-full ">
+                <h2 className="font-medium w-1/2">{post.title}</h2>
+                <h4 className="w-1/2 text-right"><span className="font-light text-neutral-500">Submitted by:</span> {post.author}</h4>
             </div>
         </Link>
     )
