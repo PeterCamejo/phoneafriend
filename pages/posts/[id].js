@@ -1,5 +1,6 @@
 import { useRouter } from "next/router"
 import Link from 'next/link'
+import Flash from '../../components/Flash'
 import {useState, useEffect} from 'react'
 import Comments from "../../components/comment/Comments"
 import PostBody from "../../components/post/PostBody"
