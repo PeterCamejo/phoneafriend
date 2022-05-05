@@ -1,18 +1,37 @@
-//Work on this after bigger features are done. Just use a a simple message for now like is set up in the NewPost page.
-/*
-*   props{
-*         message, 
-*         type  // 'success' or 'error' only. Determines flash 
-*         message background color.
-*   }
-*/
+
+import {useState} from 'react'
 
 
 const Flash = (props) =>{ 
 
-    return(
-        <div className="w-3/4 mb-3">
-            
-        </div>
-    )
+    const [body , setBody] = useState(props.body);
+
+    const handleClick = () =>{
+        setBody("")
+    }
+
+    if(body){
+        if(props.error){
+        
+            <div className="mb-3 p-3 w-full flex justify-between items-center bg-flashRed">
+                <p>Error: {props.body}</p>
+                <button className= "h-5 w-5 text-center flex justify-center items-center border-slate-500 border-solid  border-2" onClick={handleClick}>
+                    x
+                </button>
+            </div> 
+        }
+        return(
+            <div className="mb-3 p-3 w-full flex justify-between items-center bg-flashGreen">
+                <p>{props.body}</p>
+                <button className= "h-5 w-5 text-center flex justify-center items-center border-slate-500 border-solid  border-2" onClick={handleClick}>
+                    x
+                </button>
+            </div>
+        )
+    }
+
+    return
+    
 }
+
+export default Flash

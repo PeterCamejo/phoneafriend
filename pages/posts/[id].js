@@ -3,6 +3,7 @@ import Link from 'next/link'
 import {useState, useEffect} from 'react'
 import Comments from "../../components/comment/Comments"
 import PostBody from "../../components/post/PostBody"
+import AuthorButtons from "../../components/AuthorButtons"
 
 
 function ShowPost(props) {
@@ -37,30 +38,13 @@ function ShowPost(props) {
     return(
         <div className="flex flex-col justify-center border-2 border-solid border-black items-center h-screen w-screen">
             {flashSuccess ? 
-                <div>{flashSuccess}</div> : null}
+                <Flash error={false} body={flashSuccess} /> : null}
             {flashError ?
-                <div>{flashError}</div> : null}
+                <Flash error={true} body={flashError} /> : null}
+            
             <PostBody post={props.post} />
-          {/* <Comments id={id}/>  */}
-
-          {/* //TODO: Make Delete and Edit buttons a OwnerButtons components */}
-        <div className="container space-x-4 mt-3">
-            <button className="p-3 border-solid rounded-md border-2 border-black"onClick={handleDelete}>
-                Delete Post
-            </button>
-            <Link href={{pathname: `/posts/${props.post.id}/edit`,
-                  query:{
-                    title: props.post.title,
-                    author:props.post.author,
-                    body: props.post.body,
-                    id: props.post._id
-                  }
-            }}>
-                <button className="p-3 rounded-md border-solid border-2 border-black">
-                    Edit Post
-                </button>
-            </Link>
-        </div>
+            <AuthorButtons post={props.post} />
+            <Comments postId={props.post.id}/>
 
         </div>
     )

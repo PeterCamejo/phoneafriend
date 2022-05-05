@@ -1,8 +1,14 @@
 import mongoose from 'mongoose'
 
+const Schema = mongoose.Schema;
+
 const CommentSchema = new mongoose.Schema({ 
-    author: String,
-    body: String
+    body: String,
+    rating: Number,
+    author:{
+        type:Schema.Types.ObjectId,
+        ref: 'User'
+    }
 })
 
 //This export apparently prevents mongoose from recompiling the model

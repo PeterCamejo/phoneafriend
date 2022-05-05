@@ -1,17 +1,17 @@
-import Comment from "./Comment"
-import posts from "../../public/posts"
+import NewCommentForm from "./NewCommentForm"
+
 
 const Comments = (props) =>{
     
-    const currentPost = posts.find(post => post.id == props.id)
 
     return(
-        <div className="w-3/4 flex flex-col justify-center items-center border-solid border-2 border-black">
-            {currentPost.comments.map((comment, index) =>{
+        <div className="w-full flex flex-col justify-center items-center">
+            <NewCommentForm />
+            {/* {props.comments.map((comment, index) => {
                 return(
-                    <Comment author={comment.author} key={index} body={comment.body} />
+                    <Comment comment={comment} key={index} />
                 )
-            })}
+            })} */}
         </div>
     )
 }

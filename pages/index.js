@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import PostCard from '../components/post/PostCard'
+import Flash from '../components/Flash'
 import { useState } from 'react'
 import { useEffect } from 'react'
 
@@ -21,9 +22,8 @@ export default function Home(props) {
           <p>Remember to check out the <a className='text-sky-400 underline' href="https://github.com/PeterCamejo/phoneafriend"> Github repo</a> to see what features I&apos;ve already implemented and the features I&apos;m currently working on.</p>
       </div>
       <div className='container h-2/3'>
-        {flashSuccess ? 
-          <div>{flashSuccess}</div> : null}
-          <div className="container flex flex-row mb-3">
+          <div className="container  mb-3">
+            <Flash error={false} body={flashSuccess} />
             <Link href="/posts/new">
               <button className='p-3 border-solid rounded-md border-2 border-black'>
                 Create New Post
