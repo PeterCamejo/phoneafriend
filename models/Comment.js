@@ -4,11 +4,11 @@ const Schema = mongoose.Schema;
 
 const CommentSchema = new mongoose.Schema({ 
     body: String,
-    rating: Number,
-    author:{
-        type:Schema.Types.ObjectId,
-        ref: 'User'
-    }
+    // rating: Number,
+    // author:{
+    //     type:Schema.Types.ObjectId,
+    //     ref: 'User'
+    // }
 })
 
 //This export apparently prevents mongoose from recompiling the model

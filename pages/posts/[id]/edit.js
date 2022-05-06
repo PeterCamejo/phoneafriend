@@ -1,19 +1,23 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import {useRouter} from 'next/router'
 import Link from 'next/link'
+import Flash from '../../../components/flash/Flash';
+import FlashError from '../../../components/flash/FlashError';
+
 
 
 const EditPost = (props) => { 
     const router = useRouter();
-    const [title, setTitle] = useState("");
-    const [body,  setBody] = useState("");
+    const [title, setTitle] = useState(props.post.title);
+    const [body,  setBody] = useState(props.post.body);
     const [flashError , setFlashError] = useState("");
+    const [flashSuccess, setFlashSuccess] = useState("");
 
     const handleUpdate = async (e) =>{
         e.preventDefault();
 
         setFlashError('');
-        // setFlashSuccess('');
+        setFlashSuccess('');
 
         if(!title || !content){
             setFlashError('All fields are required');
@@ -51,11 +55,14 @@ const EditPost = (props) => {
         }
 
     }
+
      
     return(
         <div className="h-screen w-screen flex flex-col justify-center items-center">
             <h1 className='underline mb-3 text-lg'>Edit Post</h1>
             <div className='container w-1/2'>
+                <Flash body={flashSuccess} />
+                {flashError && <FlashError body={flashError} />}
                 <div className='container'>
                     <Link href={{pathname: `/posts/${props.post.id}`,
                         query:{
@@ -74,20 +81,21 @@ const EditPost = (props) => {
                     <form className="w-full" onSubmit={handleUpdate}>
                             <div className="mb-3">
                                 <label>Title</label>
-                                <input className='border-solid border-gray border-2 w-full'
+                                <input className='border-solid border-gray border-2 p-2 w-full'
+                                    value={title}
                                     name="title" 
                                     type='text'
-                                    onChange={(e)=>{setTitle(e.target.value)}}
-                                    value={title}
+                                    onChange={(e)=>{setTitle(e.target.value), setFlashError("")}}
                                 ></input>
                             </div>
                             <div className="mb-3">
                                 <label>Body</label>
-                                <textarea className='border-solid border-gray border-2 w-full'
+                                <textarea className='border-solid border-gray border-2 w-full p-2'
                                         name="body"
-                                        onChange={(e)=>{setBody(e.target.value)}}
+                                        onChange={(e)=>{setBody(e.target.value), setFlashError("")}}
                                         value={body}
-                                ></textarea>
+                                >
+                                </textarea>
                             </div>
                             <button  className='p-3 w-1/3 rounded-md border-solid border-black border-2'>
                                 Update

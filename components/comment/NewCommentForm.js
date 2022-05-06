@@ -1,15 +1,46 @@
 import {useState} from 'react'
+import FlashError from '../flash/FlashError';
+import Flash from '../flash/Flash';
 
-const NewCommentForm = () =>{
+const NewCommentForm = (props) =>{
 
     const [body , setBody] = useState("");
-    
-    const handleSubmit = (e) =>{
+    const [flashError, setFlashError] = useState("");
+    const [flashSuccess, setFlashSuccess] = useState("");
+
+    const handleSubmit = async (e) =>{
         e.preventDefault();
 
+        setFlashError("");
+
         if(!body){
-            //FlashError = Comment cant' be empty
+            return setFlashError("Comment can't be empty");
         }
+
+        const newComment = {
+            body,
+        }
+
+        const reqBody = {
+            comment: newComment,
+            postId: props.postId
+        }
+
+
+        let response = await fetch(`/api/posts/${props.postId}/comments`, {
+            method:'POST',
+            body: JSON.stringify(reqBody)
+        });
+
+        let data = await response.json();
+
+        if(data){
+            setBody("");
+            return setFlashSuccess("Comment posted!");
+        }else{
+            return setFlashError("An Error has occured.");
+        }
+
 
 
         return;

@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import PostCard from '../components/post/PostCard'
-import Flash from '../components/Flash'
+import Flash from '../components/flash/Flash'
 import { useState } from 'react'
 import { useEffect } from 'react'
 
@@ -23,7 +23,7 @@ export default function Home(props) {
       </div>
       <div className='container h-2/3'>
           <div className="container  mb-3">
-            <Flash error={false} body={flashSuccess} />
+            <Flash body={flashSuccess} />
             <Link href="/posts/new">
               <button className='p-3 border-solid rounded-md border-2 border-black'>
                 Create New Post

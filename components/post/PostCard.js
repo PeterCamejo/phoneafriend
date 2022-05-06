@@ -10,7 +10,8 @@ const PostCard = (props) =>{
                         title:post.title,
                         author:post.author,
                         body: post.body,
-                        id: post._id
+                        id: post._id,
+                        comments: post.comments
                     }
                         
                         }}>
