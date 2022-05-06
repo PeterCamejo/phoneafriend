@@ -26,7 +26,7 @@ const NewPost = () =>{
         let newPost = {
             author: 'Me',
             body,
-            title
+            title,
             
         }
         let response = await fetch('/api/posts', {

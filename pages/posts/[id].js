@@ -23,7 +23,7 @@ function ShowPost(props) {
             
             <PostBody post={props.post} />
             <AuthorButtons post={props.post} />
-            <Comments postId={props.post.id} comments={props.post.comments}/>
+            <Comments postId={props.post.id} comments={props.post.comments ? props.post.comments : ""}/>
 
         </div>
     )
@@ -36,7 +36,7 @@ export async function getServerSideProps(context) {
         author: context.query.author,
         body: context.query.body,
         id: context.query.id,
-        comments: context.query.comments
+        comments: context.query.comments ? context.query.comments : "",
     }
     return{
         props:{
