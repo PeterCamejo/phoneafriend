@@ -16,7 +16,7 @@ const AuthorButtons = (props) => {
     
         let response = await fetch('/api/posts', {
             method: 'DELETE',
-            body: JSON.stringify(props.post.id)
+            body: JSON.stringify(props.post._id)
         });
         let data = await response.json();
 
@@ -36,12 +36,12 @@ const AuthorButtons = (props) => {
             <button className="p-3 border-solid rounded-md border-2 border-black"onClick={handleDelete}>
                 Delete Post
             </button>
-            <Link href={{pathname: `/posts/${props.post.id}/edit`,
+            <Link href={{pathname: `/posts/${props.post._id}/edit`,
                 query:{
                     title: props.post.title,
                     author:props.post.author,
                     body: props.post.body,
-                    id: props.post._id
+                    _id: props.post._id
                 }
             }}>
                 <button className="p-3 rounded-md border-solid border-2 border-black">

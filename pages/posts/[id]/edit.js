@@ -25,7 +25,7 @@ const EditPost = (props) => {
         }
         
         let newPost = {
-            id: props.post.id,
+            _id: props.post._id,
             author: props.post.author,
             body,
             title
@@ -41,12 +41,9 @@ const EditPost = (props) => {
             setBody('');
 
             return router.push({
-                                pathname: `/posts/${props.post.id}`,
+                                pathname: `/posts/${props.post._id}`,
                                 query: {
-                                    id: props.post.id,
-                                    author: props.post.author,
-                                    body: body,
-                                    title: title,
+                                    postId: props.post._id,
                                     flash : data.data
                                 }
             })
@@ -64,12 +61,9 @@ const EditPost = (props) => {
                 <Flash body={flashSuccess} />
                 {flashError && <FlashError body={flashError} />}
                 <div className='container'>
-                    <Link href={{pathname: `/posts/${props.post.id}`,
+                    <Link href={{pathname: `/posts/${props.post._id}`,
                         query:{
-                            title: props.post.title,
-                            author:props.post.author,
-                            body: props.post.body,
-                            id: props.post._id
+                            postId: props.post._id
                         }
                     }}>
                         <button className="p-3 mb-3 rounded-md border-solid border-black border-2">
@@ -111,7 +105,7 @@ export async function getServerSideProps(context) {
         title: context.query.title,
         author: context.query.author,
         body: context.query.body,
-        id: context.query.id
+        _id: context.query._id
     }
     return{
         props:{

@@ -32,9 +32,9 @@ export default function Home(props) {
           </div>
           
           <div className='container border-2 rounded-md border-solid border-black'>
-            {data ? data.data.map((thisData, index) => {
+            {data ? data.data.map((post,index) => {
               return(
-                <PostCard key={index} post={thisData} />
+                <PostCard key={index} post={post} />
               )
             } ) : null}
           </div>

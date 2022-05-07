@@ -27,8 +27,8 @@ export default async function handler(req,res){
             break;
         case 'DELETE':
             try{
-                let id = JSON.parse(req.body);
-                await Post.findByIdAndDelete(id);
+                let _id = JSON.parse(req.body);
+                await Post.findByIdAndDelete(_id);
                 res.status(200).json({success:true, data:"Succesfully deleted."})
            
             }catch(error){
@@ -38,7 +38,7 @@ export default async function handler(req,res){
         case 'PUT':
                 try{
                     let post = JSON.parse(req.body);
-                    await Post.findByIdAndUpdate(post.id,{title: post.title, body: post.body});
+                    await Post.findByIdAndUpdate(post._id, {title: post.title, body: post.body});
                     res.status(200).json({success:true, data:'Successfully updated!'})
                 }catch(error){
                     res.status(400).json({success:false})

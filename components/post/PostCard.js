@@ -7,14 +7,9 @@ const PostCard = (props) =>{
     return(
         <Link href={{pathname: `/posts/${encodeURIComponent(post._id)}`, 
                     query:{
-                        title:post.title,
-                        author:post.author,
-                        body: post.body,
-                        id: post._id,
-                        comments: post.comments
-                    }
-                        
-                        }}>
+                        postId: post._id,
+                    }  
+        }}>
             <div className="container p-3 shadow-lg flex flex-row w-full ">
                 <h2 className="font-medium w-1/2">{post.title}</h2>
                 <h4 className="w-1/2 text-right"><span className="font-light text-neutral-500">Submitted by:</span> {post.author}</h4>
