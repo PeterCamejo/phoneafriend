@@ -10,7 +10,7 @@ export default async function handler(req,res){
     switch(method){
         case 'GET':
             try{
-                const post = await Post.findById(req.query.postId).populate('comments');
+                const post = await Post.findById(req.query.postId);
                 res.status(200).json({success: true , data: post })
             }catch( error ){
                 res.status(400).json({success:false})
