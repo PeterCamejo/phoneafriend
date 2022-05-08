@@ -29,7 +29,7 @@ export default async function handler(req,res){
             try{
                 let _id = JSON.parse(req.body);
                 await Post.findByIdAndDelete(_id);
-                res.status(200).json({success:true, data:"Succesfully deleted."})
+                res.status(200).json({success:true, data:"Successfully deleted."})
            
             }catch(error){
                 res.status(400).json({success:false})

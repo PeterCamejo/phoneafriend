@@ -6,13 +6,13 @@ import Comments from "../../components/comment/Comments"
 import PostBody from "../../components/post/PostBody"
 import AuthorButtons from "../../components/AuthorButtons"
 import FlashError from "../../components/flash/FlashError"
+import Post from '../../models/Post'
 
 
 function ShowPost(props) {
     const router = useRouter();
     const [flashError , setFlashError] = useState('');
     const [flashSuccess, setFlashSuccess] = useState(props.flash);
-
 
     return(
         <div className="flex flex-col justify-center items-center h-screen w-screen">
@@ -28,22 +28,22 @@ function ShowPost(props) {
     )
 }
 
-export async function getServerSideProps(context) {
-    const URL = process.env.NODE_ENV === 'production' ? process.env.SITE_URL : process.env.LOCAL_URL;
-    const route = `/api/posts/${context.query.postId}/?postId=${context.query.postId}`;
-    const path = URL + route;
+export async function getServerSideProps(context) {    
     let flash = context.query.flash ? context.query.flash : "";
-    let response = await fetch(path);
-    let data = await response.json();
     let post = null;
-    if(data){
-        post = data.data;
+    
+    try{
+        post = await Post.findById(context.query.postId).populate('comments');
+    }catch( error ){
+        //handle
+        console.log("Error fetching post data for /post/[id]");
     }
+
 
 
     return{
         props:{
-            post: post,
+            post: JSON.parse(JSON.stringify(post)) , //I dont want to talk about this, it works ok.
             flash:flash
         }
     }
