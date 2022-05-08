@@ -29,11 +29,16 @@ function ShowPost(props) {
 }
 
 export async function getServerSideProps(context) {
-
+    const URL = process.env.NODE_ENV === 'production' ? process.env.SITE_URL : process.env.LOCAL_URL;
+    const route = `/api/posts/${context.query.postId}/?postId=${context.query.postId}`;
+    const path = URL + route;
     let flash = context.query.flash ? context.query.flash : "";
-    let response = await fetch(`http://localhost:3000/api/posts/${context.query.postId}/?postId=${context.query.postId}`);
+    let response = await fetch(path);
     let data = await response.json();
-    const post = data.data;
+    let post = null;
+    if(data){
+        post = data.data;
+    }
 
 
     return{
