@@ -6,7 +6,9 @@ import Comments from "../../components/comment/Comments"
 import PostBody from "../../components/post/PostBody"
 import AuthorButtons from "../../components/AuthorButtons"
 import FlashError from "../../components/flash/FlashError"
-import Post from '../../models/Post'
+import Post from "../../models/Post"
+
+
 
 
 function ShowPost(props) {
@@ -31,15 +33,13 @@ function ShowPost(props) {
 export async function getServerSideProps(context) {    
     let flash = context.query.flash ? context.query.flash : "";
     let post = null;
-    
+
     try{
         post = await Post.findById(context.query.postId).populate('comments');
     }catch( error ){
         //handle
-        console.log("Error fetching post data for /post/[id]");
+        console.log(error);
     }
-
-
 
     return{
         props:{

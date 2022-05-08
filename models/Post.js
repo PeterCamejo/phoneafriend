@@ -1,6 +1,7 @@
 import mongoose from 'mongoose'
 
 const Schema = mongoose.Schema;
+const Comment = require('./Comment');
 
 const PostSchema = new mongoose.Schema({ 
     author: String,
