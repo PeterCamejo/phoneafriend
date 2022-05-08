@@ -7,6 +7,7 @@ import PostBody from "../../components/post/PostBody"
 import AuthorButtons from "../../components/AuthorButtons"
 import FlashError from "../../components/flash/FlashError"
 import Post from "../../models/Post"
+import connectDB from "../../lib/mongodb";
 
 
 
@@ -33,6 +34,8 @@ function ShowPost(props) {
 export async function getServerSideProps(context) {    
     let flash = context.query.flash ? context.query.flash : "";
     let post = null;
+
+    await connectDB();
 
     try{
         post = await Post.findById(context.query.postId).populate('comments');
