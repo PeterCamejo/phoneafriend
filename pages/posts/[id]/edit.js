@@ -3,6 +3,7 @@ import {useRouter} from 'next/router'
 import Link from 'next/link'
 import Flash from '../../../components/flash/Flash';
 import FlashError from '../../../components/flash/FlashError';
+import {FiArrowLeft} from 'react-icons/fi'
 
 
 
@@ -66,9 +67,9 @@ const EditPost = (props) => {
                             postId: props.post._id
                         }
                     }}>
-                        <button className="p-3 mb-3 rounded-md border-solid border-black border-2">
-                            Go Back
-                        </button>
+                    <button className="p-2 mb-3 text-2xl border-solid bg-pafGreen rounded-md border-black border-2">
+                        <FiArrowLeft />
+                    </button>
                     </Link>
                 </div>
                 <div className="container p-3 rounded-md flex border-black border-2 border-solid ">
@@ -91,7 +92,7 @@ const EditPost = (props) => {
                                 >
                                 </textarea>
                             </div>
-                            <button  className='p-3  rounded-md border-solid border-black border-2'>
+                            <button  className='p-3 cursor-pointer rounded-md border-solid border-black border-2'>
                                 Update
                             </button>
                     </form>

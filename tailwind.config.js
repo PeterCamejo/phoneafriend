@@ -7,7 +7,9 @@ module.exports = {
     extend: {
       colors: {
         'flashGreen': '#90EE90',
-        'flashRed': '#FFCCCB'
+        'flashRed': '#FFCCCB',
+        'pafTeal': '#00c0c0',
+        'pafGreen': '#93c733'
       }
     },
   },

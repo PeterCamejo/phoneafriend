@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useRouter } from "next/router"
 import Link from 'next/link'
+import {FaTrashAlt, FaEdit} from 'react-icons/fa'
  
 const AuthorButtons = (props) => {
     const router = useRouter();
@@ -33,8 +34,8 @@ const AuthorButtons = (props) => {
 
     return(
         <div className="container space-x-4 my-3">
-            <button className="p-3 border-solid rounded-md border-2 border-black"onClick={handleDelete}>
-                Delete Post
+            <button className="p-2 text-2xl bg-flashRed border-solid rounded-md border-2 border-black"onClick={handleDelete}>
+                <FaTrashAlt />
             </button>
             <Link href={{pathname: `/posts/${props.post._id}/edit`,
                 query:{
@@ -44,8 +45,8 @@ const AuthorButtons = (props) => {
                     _id: props.post._id
                 }
             }}>
-                <button className="p-3 rounded-md border-solid border-2 border-black">
-                    Edit Post
+                <button className="p-2 rounded-md border-solid border-2 bg-flashGreen border-black">
+                    <FaEdit className="text-2xl" />
                 </button>
             </Link>
         </div>

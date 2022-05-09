@@ -3,6 +3,7 @@ import {useRouter} from 'next/router'
 import FlashError from '../flash/FlashError';
 import Flash from '../flash/Flash';
 
+
 const NewCommentForm = (props) =>{
 
     const [body , setBody] = useState("");
@@ -61,7 +62,7 @@ const NewCommentForm = (props) =>{
                           required>
 
                 </textarea>
-                <button className="p-3 rounded-md border-solid border-black border-2" type="submit">
+                <button className="p-3 bg-pafGreen rounded-md border-solid border-black border-2" type="submit">
                     Submit
                 </button>
             </form>

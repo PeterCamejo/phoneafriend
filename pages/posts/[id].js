@@ -27,13 +27,14 @@ function ShowPost(props) {
 
 
     return(
-        <div className="flex flex-col p-3 justify-center items-center h-screen w-screen">
+        <div className="flex flex-col p-5 items-center h-screen w-screen">
             <div className="container">
                 {flashSuccess && <Flash body={flashSuccess} /> }
                 {flashError && <FlashError body={flashError} /> }
             </div>
             <PostBody post={props.post} /> 
             <AuthorButtons post={props.post} /> 
+
             <Comments postId={props.post._id} setPageFlash={setPageFlash} comments={props.post.comments ? props.post.comments : ""}/>
         
         </div>

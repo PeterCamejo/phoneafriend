@@ -3,6 +3,7 @@ import {useRouter} from 'next/router'
 import Link from 'next/link'
 import Flash from '../../components/flash/Flash'
 import FlashError from '../../components/flash/FlashError'
+import {FiArrowLeft} from 'react-icons/fi'
 
 
 const NewPost = () =>{
@@ -58,9 +59,9 @@ const NewPost = () =>{
             {flashError && <FlashError body={flashError} />}
             <div className='container'>
                 <Link href="/">
-                        <button className='p-3 border-solid rounded-md mb-3  border-black border-2'>
-                            Go Back
-                        </button>
+                    <button className="p-2 mb-3 text-2xl border-solid bg-pafGreen rounded-md border-black border-2">
+                        <FiArrowLeft />
+                    </button>
                 </Link>
             </div>
             <div className='container p-3 flex rounded-md border-solid border-2 border-black'>
@@ -83,7 +84,7 @@ const NewPost = () =>{
                         ></textarea>
                         
                     </div>
-                    <button type="submit" className='p-3 rounded-md border-black border-solid border-2'>
+                    <button type="submit" className='p-3 rounded-md cursor-pointer border-black border-solid border-2'>
                         Submit
                     </button>
                 </form>

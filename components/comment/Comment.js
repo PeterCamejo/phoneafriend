@@ -33,13 +33,12 @@ const Comment = (props) =>{
 
     return(
         <div className="container shadow-lg  inline p-2">
+            <button onClick={handleDelete} className="float-right">
+                X
+            </button>
             <p>{props.comment.body}</p>
-            <div className="float-right">
-                <button onClick={handleDelete}>
-                    X
-                </button>
-                <h4 className="font-medium text-slate-500">Author</h4>
-            </div>
+            <h4 className="font-medium float-right text-slate-500">Author</h4>
+        
         </div>
     )
 }
