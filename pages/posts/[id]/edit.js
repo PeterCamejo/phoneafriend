@@ -91,7 +91,7 @@ const EditPost = (props) => {
                                 >
                                 </textarea>
                             </div>
-                            <button  className='p-3 w-1/3 rounded-md border-solid border-black border-2'>
+                            <button  className='p-3  rounded-md border-solid border-black border-2'>
                                 Update
                             </button>
                     </form>

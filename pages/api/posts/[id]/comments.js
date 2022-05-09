@@ -26,7 +26,7 @@ export default async function handler(req,res){
                 await comment.save();
                 await post.save();
 
-                res.status(200).json({success: true , data: "Added your comment!"})
+                res.status(200).json({success: true , data: comment})
             }catch( error ){
                 res.status(400).json({success:false})
             }

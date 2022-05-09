@@ -4,8 +4,10 @@ import {useState} from 'react'
 
 const Comment = (props) =>{
     const router = useRouter();
-    const [flashSuccess, setFlashSuccess] = useState("");
-    const [flashError, setFlashError] = useState("");
+
+    const setPageFlash = props.setPageFlash;
+
+    const deleteComment = props.deleteComment;
 
     const handleDelete = async () =>{
         const reqBody = {
@@ -20,17 +22,13 @@ const Comment = (props) =>{
         let data = await response.json();
 
         if(data){
-            router.push({
-                pathname:`/posts/${props.postId}`,
-                query: { flash : data.data,
-                         postId : props.postId 
-                       }, 
-            })
+            deleteComment(props.comment);
+            return setPageFlash("Comment deleted!", false);
         }else{
-            return setFlashError("Error occured");
+            return setPageFlash('Error occured trying to delete' ,  true);
         }
 
-        return
+
     }
 
     return(

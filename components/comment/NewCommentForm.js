@@ -1,20 +1,21 @@
 import {useState} from 'react'
+import {useRouter} from 'next/router'
 import FlashError from '../flash/FlashError';
 import Flash from '../flash/Flash';
 
 const NewCommentForm = (props) =>{
 
     const [body , setBody] = useState("");
-    const [flashError, setFlashError] = useState("");
-    const [flashSuccess, setFlashSuccess] = useState("");
+
+    const setPageFlash = props.setPageFlash;
+    const addComment = props.addComment
 
     const handleSubmit = async (e) =>{
         e.preventDefault();
 
-        setFlashError("");
 
         if(!body){
-            return setFlashError("Comment can't be empty");
+            return setPageFlash("Comment can't be empty", true);
         }
 
         const newComment = {
@@ -36,9 +37,10 @@ const NewCommentForm = (props) =>{
 
         if(data){
             setBody("");
-            return setFlashSuccess("Comment posted!");
+            addComment(data.data);
+            return setPageFlash("Comment posted!", false);
         }else{
-            return setFlashError("An Error has occured.");
+            return setPageFlash("An Error has occured.", true);
         }
 
 

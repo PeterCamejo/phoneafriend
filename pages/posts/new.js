@@ -83,7 +83,7 @@ const NewPost = () =>{
                         ></textarea>
                         
                     </div>
-                    <button type="submit" className='p-3 w-1/3 rounded-md border-black border-solid border-2'>
+                    <button type="submit" className='p-3 rounded-md border-black border-solid border-2'>
                         Submit
                     </button>
                 </form>

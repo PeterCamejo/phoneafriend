@@ -13,19 +13,28 @@ import connectDB from "../../lib/mongodb";
 
 
 function ShowPost(props) {
-    const router = useRouter();
     const [flashError , setFlashError] = useState('');
     const [flashSuccess, setFlashSuccess] = useState(props.flash);
 
-    return(
-        <div className="flex flex-col justify-center items-center h-screen w-screen">
-        
-            <Flash body={flashSuccess} />
-            {flashError && <FlashError body={flashError} /> }
+    const setPageFlash = (flash , error) => {
+        if(error){
+            setFlashError(flash);
+        }else{
+            setFlashSuccess(flash);
+        }
+    }
 
+
+
+    return(
+        <div className="flex flex-col p-3 justify-center items-center h-screen w-screen">
+            <div className="container">
+                {flashSuccess && <Flash body={flashSuccess} /> }
+                {flashError && <FlashError body={flashError} /> }
+            </div>
             <PostBody post={props.post} /> 
             <AuthorButtons post={props.post} /> 
-            <Comments postId={props.post._id} comments={props.post.comments ? props.post.comments : ""}/>
+            <Comments postId={props.post._id} setPageFlash={setPageFlash} comments={props.post.comments ? props.post.comments : ""}/>
         
         </div>
     )
@@ -35,6 +44,9 @@ export async function getServerSideProps(context) {
     let flash = context.query.flash ? context.query.flash : "";
     let post = null;
 
+    // Functions like /api/posts/[id] would have, get a specific Post based on the given Id. 
+    // Can't call internal api routes in getServerSideProps, so just do that server stuff
+    // directly in getServerSideProps
     await connectDB();
 
     try{
