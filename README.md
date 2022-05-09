@@ -13,6 +13,6 @@ Users/Authentication/Authorization
 
 Completed so far:   
 Posts CRUD without Authentication.  
-Basic flash messages and errors for posts.
+Basic flash messages and errors for posts.  
 Add and Delete comments to Posts
 
