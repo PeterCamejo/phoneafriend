@@ -7,7 +7,7 @@ const PostBody = (props) =>{
 
     return(
         <div className="container flex flex-col justify-center w-full text-center items-center">
-            <div className='container border-solid pb-2 rounded-md border-black border-2'>
+            <div className='container border-solid pb-2 rounded-md border-2'>
                 <div className='shadow-lg p-5 bg-pafTeal '>
                     <h1 className='text-2xl font-medium text-left'>{post.title}</h1>
                 </div>

@@ -34,7 +34,7 @@ const Comment = (props) =>{
     }
 
     return(
-        <div className="container shadow-lg  inline p-2">
+        <div className="container shadow-md  inline p-2">
             <button onClick={handleDelete} className="float-right">
                 X
             </button>
