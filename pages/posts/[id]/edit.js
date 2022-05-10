@@ -57,21 +57,10 @@ const EditPost = (props) => {
      
     return(
         <div className="h-screen w-screen flex flex-col justify-center items-center">
-            <h1 className='underline mb-3 text-lg'>Edit Post</h1>
-            <div className='container w-1/2'>
+            <h1 className='underline mb-3 text-3xl'>Edit Post</h1>
+            <div className='container w-3/4'>
                 <Flash body={flashSuccess} />
                 {flashError && <FlashError body={flashError} />}
-                <div className='container'>
-                    <Link href={{pathname: `/posts/${props.post._id}`,
-                        query:{
-                            postId: props.post._id
-                        }
-                    }}>
-                    <button className="p-2 mb-3 text-2xl border-solid bg-pafGreen rounded-md border-black border-2">
-                        <FiArrowLeft />
-                    </button>
-                    </Link>
-                </div>
                 <div className="container p-3 rounded-md flex border-black border-2 border-solid ">
                     <form className="w-full" onSubmit={handleUpdate}>
                             <div className="mb-3">
@@ -92,7 +81,7 @@ const EditPost = (props) => {
                                 >
                                 </textarea>
                             </div>
-                            <button  className='p-3 cursor-pointer rounded-md border-solid border-black border-2'>
+                            <button  className='p-3 cursor-pointer bg-pafGreen rounded-md'>
                                 Update
                             </button>
                     </form>

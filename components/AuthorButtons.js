@@ -34,7 +34,7 @@ const AuthorButtons = (props) => {
 
     return(
         <div className="container space-x-4 my-3">
-            <button className="p-2 text-2xl bg-flashRed border-solid rounded-md border-2 border-black"onClick={handleDelete}>
+            <button className="p-2 text-2xl bg-flashRed rounded-md"onClick={handleDelete}>
                 <FaTrashAlt />
             </button>
             <Link href={{pathname: `/posts/${props.post._id}/edit`,
@@ -45,7 +45,7 @@ const AuthorButtons = (props) => {
                     _id: props.post._id
                 }
             }}>
-                <button className="p-2 rounded-md border-solid border-2 bg-flashGreen border-black">
+                <button className="p-2 rounded-md bg-flashGreen ">
                     <FaEdit className="text-2xl" />
                 </button>
             </Link>

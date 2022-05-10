@@ -39,10 +39,11 @@ const NewCommentForm = (props) =>{
         if(data){
             setBody("");
             addComment(data.data);
-            return setPageFlash("Comment posted!", false);
-        }else{
-            return setPageFlash("An Error has occured.", true);
         }
+        //     return setPageFlash("Comment posted!", false);
+        // // }else{
+        //     return setPageFlash("An Error has occured.", true);
+        // }
 
 
 
@@ -51,7 +52,7 @@ const NewCommentForm = (props) =>{
 
 
     return (
-        <div className="container p-3 mb-3 w-full flex flex-row rounded-md border-black border-2 border-solid">
+        <div className="container p-3 mb-3 w-full flex flex-row rounded-md border-slate-300 border-2 border-solid">
             <h1 className="h-full">Add a comment:</h1>
             <form onSubmit={handleSubmit} className="w-full">
                 <textarea className="w-full mb-3 border-solid border-2" 
@@ -62,7 +63,7 @@ const NewCommentForm = (props) =>{
                           required>
 
                 </textarea>
-                <button className="p-3 bg-pafGreen rounded-md border-solid border-black border-2" type="submit">
+                <button className="p-3 bg-pafGreen rounded-md" type="submit">
                     Submit
                 </button>
             </form>

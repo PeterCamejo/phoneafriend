@@ -52,18 +52,11 @@ const NewPost = () =>{
 
     return (
     <div className="h-screen w-screen flex flex-col justify-center items-center">
-        <h1 className='mb-3 text-lg underline'> New Post</h1>
+        <h1 className='mb-3 text-3xl underline'> New Post</h1>
 
-        <div className='container w-1/2'>
+        <div className='container w-3/4'>
             <Flash body={flashSuccess} />
             {flashError && <FlashError body={flashError} />}
-            <div className='container'>
-                <Link href="/">
-                    <button className="p-2 mb-3 text-2xl border-solid bg-pafGreen rounded-md border-black border-2">
-                        <FiArrowLeft />
-                    </button>
-                </Link>
-            </div>
             <div className='container p-3 flex rounded-md border-solid border-2 border-black'>
                 <form onSubmit={handlePost} className='w-full '>
                     <div className='mb-3'>

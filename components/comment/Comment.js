@@ -23,10 +23,12 @@ const Comment = (props) =>{
 
         if(data){
             deleteComment(props.comment);
-            return setPageFlash("Comment deleted!", false);
-        }else{
-            return setPageFlash('Error occured trying to delete' ,  true);
         }
+        //     return setPageFlash("Comment deleted!", false);
+        // }else{
+        //     return setPageFlash('Error occured trying to delete' ,  true);
+        // }
+        return
 
 
     }

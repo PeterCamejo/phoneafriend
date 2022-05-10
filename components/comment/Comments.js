@@ -15,7 +15,7 @@ const Comments = (props) =>{
     const forceUpdate = useCallback(() => updateState({}), []);
 
     const addComment = (comment) =>{
-        comments.push(comment);
+        comments.unshift(comment);
         setComments(comments);
         forceUpdate();
     }
