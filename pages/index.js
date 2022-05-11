@@ -25,11 +25,6 @@ export default function Home(props) {
       <div className='container h-2/3'>
           <div className="container  mb-3">
             <Flash body={flashSuccess} />
-            <Link href="/posts/new">
-              <button className='p-3 bg-pafGreen rounded-md'>
-                Create New Post
-              </button>
-            </Link> 
           </div>
           
           <div className='container border-2 rounded-md border-solid'>

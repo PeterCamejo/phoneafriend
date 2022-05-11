@@ -28,15 +28,17 @@ function ShowPost(props) {
 
     return(
         <div className="flex flex-col p-5 items-center h-screen w-screen">
-            <div className="container">
-                {flashSuccess && <Flash body={flashSuccess} /> }
-                {flashError && <FlashError body={flashError} /> }
+            <div className="container h-1/2 flex flex-col justify-center">
+                <div className="container">
+                    {flashSuccess && <Flash body={flashSuccess} /> }
+                    {flashError && <FlashError body={flashError} /> }
+                </div>
+                <PostBody post={props.post} /> 
+                <AuthorButtons post={props.post} /> 
             </div>
-            <PostBody post={props.post} /> 
-            <AuthorButtons post={props.post} /> 
-
-            <Comments postId={props.post._id} setPageFlash={setPageFlash} comments={props.post.comments ? props.post.comments : ""}/>
-        
+            <div className="container h-1/2">
+                <Comments postId={props.post._id} setPageFlash={setPageFlash} comments={props.post.comments ? props.post.comments : ""}/>
+            </div>
         </div>
     )
 }

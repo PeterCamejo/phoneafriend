@@ -57,7 +57,7 @@ const NewPost = () =>{
         <div className='container w-3/4'>
             <Flash body={flashSuccess} />
             {flashError && <FlashError body={flashError} />}
-            <div className='container p-3 flex rounded-md border-solid border-2 border-black'>
+            <div className='container p-3 flex rounded-md border-solid border-2'>
                 <form onSubmit={handlePost} className='w-full '>
                     <div className='mb-3'>
                         <label>Title</label>
@@ -77,7 +77,7 @@ const NewPost = () =>{
                         ></textarea>
                         
                     </div>
-                    <button type="submit" className='p-3 rounded-md cursor-pointer border-black border-solid border-2'>
+                    <button type="submit" className='p-3 rounded-md cursor-pointer bg-pafGreen'>
                         Submit
                     </button>
                 </form>

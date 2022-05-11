@@ -10,7 +10,7 @@ const PostCard = (props) =>{
                         postId: post._id,
                     }  
         }}>
-            <div className="container p-3 shadow-lg flex flex-row w-full cursor-pointer ">
+            <div className="container p-3 shadow-lg flex flex-row w-full cursor-pointer hover:border-pafTeal hover:border-2 ">
                 <h2 className="font-medium w-1/2">{post.title}</h2>
                 <h4 className="w-1/2 text-right"><span className="font-light text-neutral-500">Submitted by:</span> {post.author}</h4>
             </div>
