@@ -10,6 +10,5 @@ const UserSchema = new mongoose.Schema({
 });
 
 UserSchema.plugin(passportLocalMongoose);
-
 //This export apparently prevents mongoose from recompiling the model
 module.exports = mongoose.models.User || mongoose.model('User' , UserSchema)

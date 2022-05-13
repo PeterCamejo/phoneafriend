@@ -1,15 +1,52 @@
 import {useState} from 'react';
+import {useRouter} from 'next/router'
 import Flash from '../../components/flash/Flash';
+import FlashError from '../../components/flash/FlashError';
 
 const Login = (props) =>{
 
-    const [email ,  setEmail] = useState("");
+    const [username , setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [flashSuccess, setFlashSuccess] = useState(props.flash);
+    const [flashError,  setFlashError] = useState("");
 
-    const onSubmit = () =>{
+    const router = useRouter();
 
+    const onSubmit = async (e) =>{
+        e.preventDefault();
+
+        if(!username || !password ){
+            setFlashError("All fields required");
+        }
+
+        let user = {
+            username,
+            password
+        }
+
+        let response = await fetch('/api/users/login',{
+            method:'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                username,
+                password
+            })
+        })
+        
+        let data = await response.json();
+
+        if(data){
+           return router.push({
+                pathname: '/',
+                query: {
+                    flash:data.data
+                }
+            });
+        }else{
+            return setFlashError("Failed to login!");
+        }
     }
+
 
     return (
         <div className='h-screen w-screen flex flex-col justify-center items-center'>
@@ -17,17 +54,28 @@ const Login = (props) =>{
             <div className='container w-3/4'>
                 {/*Flash Stuff */}
                 {flashSuccess && <Flash body={flashSuccess} />}
+                {flashError && <FlashError body={flashError} />}
                 <div className='container p-3 flex rounded-md border-solid border-2'>
                     <form onSubmit={onSubmit} className='w-full'>
                         <div className='mb-3'>
-                            <label>Email: </label>
+                            <label>Username: </label>
                             <input className='container p-3 flex rounded-md border-solid border-2' 
-                                   type='email' />
+                                   name='username'
+                                   type='text'
+                                   onChange={(e)=>{setUsername(e.target.value)}}
+                                   value={username}
+                                   required
+                            />
                         </div>
                         <div className='mb-3'>
                             <label>Password: </label>
                             <input className='container p-3 flex rounded-md border-solid border-2 '
-                                   type='password' />
+                                   name="password"
+                                   type='password'
+                                   onChange={(e)=>{setPassword(e.target.value)}}
+                                   value={password}
+                                   required 
+                            />
                         </div>
                         <button className='p-3 bg-pafGreen rounded-md' type='submit'>
                             Submit

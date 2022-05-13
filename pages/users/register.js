@@ -1,11 +1,13 @@
 import {useState} from 'react'
 import {useRouter} from 'next/router'
+import FlashError from '../../components/flash/FlashError';
 
 const Register = () => {
 
     const [email ,  setEmail] = useState("");
     const [username , setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [flashError, setFlashError] = useState("");
 
     const router = useRouter();
 
@@ -13,7 +15,7 @@ const Register = () => {
         e.preventDefault();
 
         if(!email || !username || !password){
-            //setFlashError("All fields required");
+            setFlashError("All fields required");
         }
 
         const newUser = {
@@ -37,8 +39,7 @@ const Register = () => {
                                 }
             });
         }else{
-            return
-            // return setFlashError("An Error has occured");
+            return setFlashError("Failed to register");
         }
 
     }
@@ -48,6 +49,7 @@ const Register = () => {
             <h1 className='mb-3 text-3xl underline'> Register</h1>
             <div className='container w-3/4'>
                 {/*Flash Stuff */}
+                {flashError && <FlashError body={flashError} />}
                 <div className='container p-3 flex rounded-md border-solid border-2'>
                     <form onSubmit={onSubmit} className='w-full'>
                         <div className='mb-3'>
