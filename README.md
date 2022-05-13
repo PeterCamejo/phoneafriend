@@ -6,11 +6,13 @@ Phone-a-Friend is an application wherein users can ask and answer questions in a
   
 
 **What's next for PhoneAFriend:  **  
-Navbar  
-Users/Authentication/Authorization    
+User Login  
+Authorization for author components.
             
 
-**Completed so far: **    
+**Completed so far: **
+User Registration
+Navbar(TODO: Mobile view);    
 Posts CRUD without Auth  
 Basic flash messages and errors for posts.  
 Add and Delete comments to Posts without Auth  

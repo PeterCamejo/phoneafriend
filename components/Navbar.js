@@ -10,8 +10,8 @@ const Navbar = () => {
                 <Link href="/posts/new">New Post</Link>
             </div>    
             <div className="flex flex-row justify-end space-x-4 w-1/2">
-                <Link href="/user/login">Login</Link>
-                <Link href="/user/register">Register</Link>
+                <Link href="/users/login">Login</Link>
+                <Link href="/users/register">Register</Link>
                 {/* Or <h4>Logout</h4> if logged in */}
             </div>
         </div>
