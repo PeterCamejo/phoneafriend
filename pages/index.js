@@ -13,7 +13,7 @@ export default function Home(props) {
 
   useEffect(()=>{
     fetch('/api/posts').then((response) => response.json()).then((data)=> setData(data))
-  }, [])
+  }, [data])
   
   return (
     <div className='h-screen w-screen p-6 flex flex-col items-center justify-center'> 

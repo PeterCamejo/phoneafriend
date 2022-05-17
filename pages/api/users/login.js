@@ -27,7 +27,7 @@ handler.post(
     passport.authenticate('local'),
     (req, res) => {        
         try{
-            res.status(201).json({success: true, data: "Logged in!"});
+            res.status(201).json({success: true, data: "Logged in!", user: req.user});
         }catch(e){
             console.log("error with res: " , e);
         }

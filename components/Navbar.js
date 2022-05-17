@@ -1,8 +1,12 @@
 import Link from 'next/link'
 import {useRouter} from 'next/router'
+import {useUser} from '../lib/hooks'
+import LogOutBtn from './LogOutBtn'
+ 
 const Navbar = () => { 
 
     const router = useRouter();
+    const [user, {loading}] = useUser();
 
     const handleLogout = async (e) =>{
         e.preventDefault();
@@ -14,12 +18,13 @@ const Navbar = () => {
         let data = await response.json();
 
         if(data){
-            return router.push({
+            router.push({
                 pathname: '/',
                 query:{
                     flash: data.data
                 }
             })
+            return router.reload();
         }
 
         return;
@@ -33,10 +38,10 @@ const Navbar = () => {
                 <Link href="/posts/new">New Post</Link>
             </div>    
             <div className="flex flex-row justify-end space-x-4 w-1/2">
-                <Link href="/users/login">Login</Link>
-                <Link href="/users/register">Register</Link>
+                {(!user && !loading) && <Link href="/users/login">Login</Link> }
+                {(!user && !loading) && <Link href="/users/register">Register</Link>}
                 {/* Or <h4>Logout</h4> if logged in */}
-                <button onClick={handleLogout}>Logout</button>
+                 {(user || loading) && <LogOutBtn handleLogout={handleLogout} />}
             </div>
         </div>
     )

@@ -2,13 +2,14 @@ import {useState} from 'react';
 import {useRouter} from 'next/router'
 import Flash from '../../components/flash/Flash';
 import FlashError from '../../components/flash/FlashError';
+import { useEffect } from 'react'
 
 const Login = (props) =>{
 
     const [username , setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [flashSuccess, setFlashSuccess] = useState(props.flash);
-    const [flashError,  setFlashError] = useState("");
+    const [flashError,  setFlashError] = useState(props.flashError);
 
     const router = useRouter();
 
@@ -36,16 +37,21 @@ const Login = (props) =>{
         let data = await response.json();
 
         if(data){
-           return router.push({
+           router.push({
                 pathname: '/',
                 query: {
                     flash:data.data
                 }
             });
+            router.reload();
         }else{
             return setFlashError("Failed to login!");
         }
     }
+
+    useEffect(()=>{
+        router.prefetch('/');
+    }, []);
 
 
     return (
@@ -91,13 +97,18 @@ export default Login
 
 export async function getServerSideProps(context) {
     let flash = ""
+    let flashError = ""
   
     if(context.query.flash){
       flash = context.query.flash
     }
+    if(context.query.flashError){
+        flashError = context.query.flashError
+    }
     return{
       props:{
-          flash:flash
+          flash:flash,
+          flashError: flashError
       }
     }
   }
