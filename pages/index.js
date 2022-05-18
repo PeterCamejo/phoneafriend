@@ -2,18 +2,25 @@ import Head from 'next/head'
 import Link from 'next/link'
 import PostCard from '../components/post/PostCard'
 import Flash from '../components/flash/Flash'
-import Navbar from '../components/Navbar'
+import FlashError from '../components/flash/FlashError'
 import { useState } from 'react'
 import { useEffect } from 'react'
+import useSWR from 'swr'
+import { fetcherFn } from '../lib/hooks'
+import connectDB from '../lib/mongodb'
 
 export default function Home(props) {
 
   const [flashSuccess , setFlashSuccess] = useState(props.flash);
-  const [data , setData] = useState("");
+  const [flashError, setFlashError] = useState(props.flashError);
+  const {data} = useSWR('/api/posts', fetcherFn);
+  const [posts , setPosts] = useState(data ? data : "");
 
   useEffect(()=>{
-    fetch('/api/posts').then((response) => response.json()).then((data)=> setData(data))
-  }, [data])
+
+    setPosts(data);
+
+  },[data])
   
   return (
     <div className='h-screen w-screen p-6 flex flex-col items-center justify-center'> 
@@ -24,11 +31,13 @@ export default function Home(props) {
       </div>
       <div className='container h-2/3'>
           <div className="container  mb-3">
-            <Flash body={flashSuccess} />
+            {flashSuccess && <Flash body={flashSuccess} />}
+            {flashError && <FlashError body={flashError}/>} 
+
           </div>
           
           <div className='container border-2 rounded-md border-solid'>
-            {data ? data.data.map((post,index) => {
+            {posts ? posts.data.map((post,index) => {
               return(
                 <PostCard key={index} post={post} />
               )
@@ -41,14 +50,20 @@ export default function Home(props) {
 
 
 export async function getServerSideProps(context) {
+  await connectDB();
   let flash = ""
-
+  let flashError = ""
+  
   if(context.query.flash){
     flash = context.query.flash
   }
+  if(context.query.flashError){
+    flashError = context.query.flashError
+  }
   return{
     props:{
-        flash:flash
+        flash:flash,
+        flashError: flashError
     }
   }
 }

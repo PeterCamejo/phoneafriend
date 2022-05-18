@@ -32,7 +32,6 @@ const NewPost = (props) =>{
 
     const handlePost = async (e) => {
         e.preventDefault();
-
         setFlashError('');
         setFlashSuccess('');
 
@@ -42,7 +41,7 @@ const NewPost = (props) =>{
         }
         
         let newPost = {
-            author: 'Me',
+            author: user._id,
             body,
             title,
             

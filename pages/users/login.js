@@ -34,18 +34,30 @@ const Login = (props) =>{
             })
         })
         
-        let data = await response.json();
-
-        if(data){
-           router.push({
-                pathname: '/',
-                query: {
-                    flash:data.data
+        if(response.status === 401){
+            router.push({
+                pathname: '/users/login',
+                query:{
+                    flashError: 'Incorrect credentials'
                 }
-            });
+            })
+
             router.reload();
         }else{
-            return setFlashError("Failed to login!");
+
+            let data = await response.json();
+
+            if(data){
+            router.push({
+                    pathname: '/',
+                    query: {
+                        flash:data.data
+                    }
+                });
+                router.reload();
+            }else{
+                return setFlashError("Failed to login!");
+            }
         }
     }
 
@@ -58,7 +70,6 @@ const Login = (props) =>{
         <div className='h-screen w-screen flex flex-col justify-center items-center'>
             <h1 className='mb-3 text-3xl underline'>Login</h1>
             <div className='container w-3/4'>
-                {/*Flash Stuff */}
                 {flashSuccess && <Flash body={flashSuccess} />}
                 {flashError && <FlashError body={flashError} />}
                 <div className='container p-3 flex rounded-md border-solid border-2'>

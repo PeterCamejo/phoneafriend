@@ -8,6 +8,7 @@ import AuthorButtons from "../../components/AuthorButtons"
 import FlashError from "../../components/flash/FlashError"
 import Post from "../../models/Post"
 import connectDB from "../../lib/mongodb";
+import {useUser} from '../../lib/hooks'
 
 
 
@@ -15,15 +16,18 @@ import connectDB from "../../lib/mongodb";
 function ShowPost(props) {
     const [flashError , setFlashError] = useState('');
     const [flashSuccess, setFlashSuccess] = useState(props.flash);
+    const[user, {loading}] = useUser();
+    const [post,  setPost] = useState(props.post);
 
-    const setPageFlash = (flash , error) => {
-        if(error){
-            setFlashError(flash);
-        }else{
-            setFlashSuccess(flash);
-        }
+   const isAuthor = ()=> {
+            if(user || loading){
+                if(post.author === user._id){
+                    return true;
+                }
+            }
+
+            return false;
     }
-
 
 
     return(
@@ -34,10 +38,10 @@ function ShowPost(props) {
                     {flashError && <FlashError body={flashError} /> }
                 </div>
                 <PostBody post={props.post} /> 
-                <AuthorButtons post={props.post} /> 
+                {isAuthor() && <AuthorButtons post={props.post} /> }
             </div>
             <div className="container h-1/2">
-                <Comments postId={props.post._id} setPageFlash={setPageFlash} comments={props.post.comments ? props.post.comments : ""}/>
+                <Comments postId={props.post._id} comments={props.post.comments ? props.post.comments : ""}/>
             </div>
         </div>
     )

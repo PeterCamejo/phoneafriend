@@ -22,11 +22,31 @@ const AuthorButtons = (props) => {
         let data = await response.json();
 
         if(data){
-            return router.push({
+            //failed isLoggedIn middleware
+            if(data.notLoggedIn){
+                return router.push({    
+                    pathname: `/users/login`,
+                    query: {
+                        flashError : 'Need to be logged in for that'
+                    }
+                })
+            }
+            //failed isPostAuthor middleware
+            if(data.notAuthor){
+                return router.push({    
+                    pathname: '/',
+                    query: {
+                        flashError : 'You are not the author.'
+                    }
+                })
+            }
+
+            router.push({
                                 pathname:"/",
                                 query: { flash : data.data },
             });
 
+            return router.reload();
         }else{
             return setFlashError("An Error has occured");
         }

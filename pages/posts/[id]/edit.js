@@ -31,13 +31,34 @@ const EditPost = (props) => {
             body,
             title
         }
-        let response = await fetch('/api/posts/', {
+
+        const response = await fetch('/api/posts/', {
             method: 'PUT',
             body: JSON.stringify(newPost)
         });
-        let data = await response.json();
+
+        const data = await response.json();
 
         if(data){
+            //failed isLoggedIn middleware
+            if(data.notLoggedIn){
+                return router.push({    
+                    pathname: `/users/login`,
+                    query: {
+                        flashError : 'Need to be logged in for that'
+                    }
+                })
+            }
+            //failed isPostAuthor middleware
+            if(data.notAuthor){
+                return router.push({    
+                    pathname: '/',
+                    query: {
+                        flashError : 'You are not the author.'
+                    }
+                })
+            }
+
             setTitle('');
             setBody('');
 
@@ -48,9 +69,9 @@ const EditPost = (props) => {
                                     flash : data.data
                                 }
             })
-        }else{
-            return setFlashError("An Error has occured");
-        }
+            }else{
+                return setFlashError("An Error has occured");
+            }
 
     }
 

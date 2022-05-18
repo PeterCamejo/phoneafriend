@@ -14,13 +14,15 @@
         let data = await response.json();
 
         if(data){
-            router.push({
+           router.replace({
                 pathname: '/',
                 query:{
                     flash: data.data
                 }
             })
+
             return router.reload();
+            
         }
 
         return;

@@ -2,6 +2,7 @@ import Link from 'next/link'
 import {useRouter} from 'next/router'
 import {useUser} from '../lib/hooks'
 import LogOutBtn from './LogOutBtn'
+import connectDB from '../lib/mongodb'
  
 const Navbar = () => { 
 
@@ -35,7 +36,7 @@ const Navbar = () => {
             <div className="flex flex-row space-x-4 w-1/2">
                 <Link href="/">Logo</Link>
                 <Link href="/">Posts</Link>
-                <Link href="/posts/new">New Post</Link>
+                {(user || loading) && <Link href="/posts/new">New Post</Link>}
             </div>    
             <div className="flex flex-row justify-end space-x-4 w-1/2">
                 {(!user && !loading) && <Link href="/users/login">Login</Link> }
