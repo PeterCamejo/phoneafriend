@@ -10,7 +10,7 @@ export async function getPostIndex(){
 }
 
 export async function createPost(req){
-    await connectDB();
+    const db = await connectDB();
     let post = JSON.parse(req.body);
     post.author = req.user._id;
     await Post.create(post);
