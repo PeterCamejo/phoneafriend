@@ -4,6 +4,8 @@ import Link from 'next/link'
 import Flash from '../../../components/flash/Flash';
 import FlashError from '../../../components/flash/FlashError';
 import {FiArrowLeft} from 'react-icons/fi'
+import { connect } from 'mongoose';
+import connectDB from '../../../lib/mongodb';
 
 
 
@@ -112,6 +114,8 @@ const EditPost = (props) => {
     )
 }
 export async function getServerSideProps(context) {
+    await connectDB();
+
     let post = {
         title: context.query.title,
         author: context.query.author,

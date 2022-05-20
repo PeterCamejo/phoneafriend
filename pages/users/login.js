@@ -3,6 +3,7 @@ import {useRouter} from 'next/router'
 import Flash from '../../components/flash/Flash';
 import FlashError from '../../components/flash/FlashError';
 import { useEffect } from 'react'
+import connectDB from '../../lib/mongodb';
 
 const Login = (props) =>{
 
@@ -107,6 +108,8 @@ const Login = (props) =>{
 export default Login
 
 export async function getServerSideProps(context) {
+    await connectDB();
+
     let flash = ""
     let flashError = ""
   

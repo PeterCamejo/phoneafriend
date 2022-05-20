@@ -6,6 +6,7 @@ import FlashError from '../../components/flash/FlashError'
 import {FiArrowLeft} from 'react-icons/fi'
 import {useUser} from '../../lib/hooks'
 import { useEffect } from 'react'
+import connectDB from '../../lib/mongodb'
 
 
 const NewPost = (props) =>{
@@ -105,3 +106,22 @@ const NewPost = (props) =>{
 
 export default NewPost
 
+export async function getServerSideProps(context) {
+    await connectDB();
+
+    let flash = ""
+    let flashError = ""
+    
+    if(context.query.flash){
+      flash = context.query.flash
+    }
+    if(context.query.flashError){
+      flashError = context.query.flashError
+    }
+    return{
+      props:{
+          flash:flash,
+          flashError: flashError
+      }
+    }
+  }

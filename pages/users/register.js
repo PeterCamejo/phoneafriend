@@ -93,3 +93,23 @@ const Register = () => {
 }
 
 export default Register
+
+export async function getServerSideProps(context) {
+    await connectDB();
+    
+    let flash = ""
+    let flashError = ""
+    
+    if(context.query.flash){
+      flash = context.query.flash
+    }
+    if(context.query.flashError){
+      flashError = context.query.flashError
+    }
+    return{
+      props:{
+          flash:flash,
+          flashError: flashError
+      }
+    }
+  }
