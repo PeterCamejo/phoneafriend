@@ -11,7 +11,7 @@ const PostBody = (props) =>{
                 </div>
                 <div className='p-3'>
                     <p className='mb-3 text-left' >{post.body}</p>
-                    <h4 className='font-light text-neutral-500 float-right'>Submitted by: {post.author}</h4>
+                    <h4 className='float-right'><span className="font-light text-neutral-500 ">Submitted by:</span> {props.author.username}</h4>
                 </div>
             </div>
         </div>

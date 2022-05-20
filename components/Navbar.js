@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import {useRouter} from 'next/router'
 import {useUser} from '../lib/hooks'
-import LogOutBtn from './LogOutBtn'
+import LogOutBtn from './user/LogOutBtn'
  
 const Navbar = () => { 
 

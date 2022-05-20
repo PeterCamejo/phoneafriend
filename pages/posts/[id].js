@@ -2,11 +2,14 @@ import Flash from '../../components/flash/Flash'
 import {useState} from 'react'
 import Comments from "../../components/comment/Comments"
 import PostBody from "../../components/post/PostBody"
-import AuthorButtons from "../../components/AuthorButtons"
+import AuthorButtons from "../../components/user/AuthorButtons"
 import FlashError from "../../components/flash/FlashError"
 import Post from "../../models/Post"
 import connectDB from "../../lib/mongodb";
 import {useUser} from '../../lib/hooks'
+
+import useSWR from 'swr'
+import { fetcherFn } from '../../lib/hooks'
 
 function ShowPost(props) {
     const [flashError , setFlashError] = useState('');
@@ -14,9 +17,10 @@ function ShowPost(props) {
     const[user, {loading}] = useUser();
     const [post,  setPost] = useState(props.post);
 
+
    const isAuthor = ()=> {
             if((user || loading) && user !== undefined){
-                        if(post.author === user._id){
+                        if(props.author._id === user._id){
                             return true;
                         }
                 }
@@ -31,11 +35,11 @@ function ShowPost(props) {
                     {flashSuccess && <Flash body={flashSuccess} /> }
                     {flashError && <FlashError body={flashError} /> }
                 </div>
-                <PostBody post={props.post} /> 
+                <PostBody post={props.post} author={props.author} /> 
                 {isAuthor() && <AuthorButtons post={props.post} /> }
             </div>
             <div className="container h-1/2">
-                <Comments postId={props.post._id} comments={props.post.comments ? props.post.comments : ""}/>
+                <Comments postId={props.post._id} comments={props.comments ? props.comments : ""}/>
             </div>
         </div>
     )
@@ -44,6 +48,8 @@ function ShowPost(props) {
 export async function getServerSideProps(context) {    
     let flash = context.query.flash ? context.query.flash : "";
     let post = null;
+    let author = null;
+    let comments = null;
 
     // Functions like /api/posts/[id] would have, get a specific Post based on the given Id. 
     // Can't call internal api routes in getServerSideProps, so just do that server stuff
@@ -51,7 +57,14 @@ export async function getServerSideProps(context) {
     await connectDB();
 
     try{
-        post = await Post.findById(context.query.postId).populate('comments');
+        post = await Post.findById(context.query.postId).populate('comments').populate('author');
+        author = post.author;
+        comments = post.comments;
+        post = {
+            _id: post._id,
+            title: post.title,
+            body: post.body
+        }
     }catch( error ){
         //handle
         console.log(error);
@@ -59,8 +72,10 @@ export async function getServerSideProps(context) {
 
     return{
         props:{
-            post: JSON.parse(JSON.stringify(post)) , //I dont want to talk about this, it works ok.
-            flash:flash
+            post: JSON.parse(JSON.stringify(post)),
+            author: JSON.parse(JSON.stringify(author)),
+            comments: JSON.parse(JSON.stringify(comments)),
+            flash
         }
     }
 }

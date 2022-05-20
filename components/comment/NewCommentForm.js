@@ -1,8 +1,4 @@
 import {useState} from 'react'
-import {useRouter} from 'next/router'
-import FlashError from '../flash/FlashError';
-import Flash from '../flash/Flash';
-
 
 const NewCommentForm = (props) =>{
 
