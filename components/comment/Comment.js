@@ -1,11 +1,5 @@
-import {useRouter} from 'next/router'
-import {useState} from 'react'
-
 
 const Comment = (props) =>{
-    const router = useRouter();
-
-    const setPageFlash = props.setPageFlash;
 
     const deleteComment = props.deleteComment;
 
@@ -24,13 +18,8 @@ const Comment = (props) =>{
         if(data){
             deleteComment(props.comment);
         }
-        //     return setPageFlash("Comment deleted!", false);
-        // }else{
-        //     return setPageFlash('Error occured trying to delete' ,  true);
-        // }
+        
         return
-
-
     }
 
     return(

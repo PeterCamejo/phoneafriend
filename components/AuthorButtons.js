@@ -5,16 +5,10 @@ import {FaTrashAlt, FaEdit} from 'react-icons/fa'
  
 const AuthorButtons = (props) => {
     const router = useRouter();
-    const [flashError , setFlashError] = useState('');
-    const [flashSuccess, setFlashSuccess] = useState(props.flash);
     
     const handleDelete = async (e) =>{
         e.preventDefault();
 
-        setFlashError('');
-        setFlashSuccess('');
-  
-    
         let response = await fetch('/api/posts', {
             method: 'DELETE',
             body: JSON.stringify(props.post._id)
@@ -47,9 +41,9 @@ const AuthorButtons = (props) => {
             });
 
             return router.reload();
-        }else{
-            return setFlashError("An Error has occured");
         }
+
+        return
     }
 
     return(

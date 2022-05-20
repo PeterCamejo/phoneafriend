@@ -22,13 +22,12 @@
             })
 
             return router.reload();
-            
         }
 
         return;
     }
 
-     return(
+    return(
             <button onClick={handleLogout}>Logout</button>
      )
  }

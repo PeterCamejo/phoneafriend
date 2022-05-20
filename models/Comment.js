@@ -11,5 +11,5 @@ const CommentSchema = new mongoose.Schema({
     // }
 })
 
-//This export apparently prevents mongoose from recompiling the model
+
 module.exports = mongoose.models.Comment || mongoose.model('Comment' , CommentSchema)

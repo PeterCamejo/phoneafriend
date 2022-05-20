@@ -1,7 +1,4 @@
-import connectDB from "../lib/mongodb";
 import Post from "../models/Post"
-
-
 
 export async function getPostIndex(){
     const posts = await Post.find({});

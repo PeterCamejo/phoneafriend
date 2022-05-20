@@ -18,5 +18,4 @@ const PostSchema = new Schema({
     ]
 });
 
-//This export apparently prevents mongoose from recompiling the model
 module.exports = mongoose.models.Post || mongoose.model('Post' , PostSchema)

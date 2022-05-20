@@ -2,7 +2,6 @@ import Link from 'next/link'
 import {useRouter} from 'next/router'
 import {useUser} from '../lib/hooks'
 import LogOutBtn from './LogOutBtn'
-import connectDB from '../lib/mongodb'
  
 const Navbar = () => { 
 
@@ -41,7 +40,6 @@ const Navbar = () => {
             <div className="flex flex-row justify-end space-x-4 w-1/2">
                 {(!user && !loading) && <Link href="/users/login">Login</Link> }
                 {(!user && !loading) && <Link href="/users/register">Register</Link>}
-                {/* Or <h4>Logout</h4> if logged in */}
                  {(user || loading) && <LogOutBtn handleLogout={handleLogout} />}
             </div>
         </div>

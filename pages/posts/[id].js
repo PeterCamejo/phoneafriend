@@ -1,7 +1,5 @@
-import { useRouter } from "next/router"
-import Link from 'next/link'
 import Flash from '../../components/flash/Flash'
-import {useState, useEffect} from 'react'
+import {useState} from 'react'
 import Comments from "../../components/comment/Comments"
 import PostBody from "../../components/post/PostBody"
 import AuthorButtons from "../../components/AuthorButtons"
@@ -9,9 +7,6 @@ import FlashError from "../../components/flash/FlashError"
 import Post from "../../models/Post"
 import connectDB from "../../lib/mongodb";
 import {useUser} from '../../lib/hooks'
-
-
-
 
 function ShowPost(props) {
     const [flashError , setFlashError] = useState('');
@@ -28,7 +23,6 @@ function ShowPost(props) {
 
             return false;
     }
-
 
     return(
         <div className="flex flex-col p-5 items-center h-screen w-screen">

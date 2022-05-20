@@ -17,8 +17,6 @@ const NewPost = (props) =>{
     const[flashSuccess, setFlashSuccess] = useState('');
     const[user, {loading}] = useUser();
 
-    
-
     useEffect(()=>{
         if(!loading && !user){
             router.replace({
@@ -29,7 +27,6 @@ const NewPost = (props) =>{
         });
         }
     }, [user, loading]);
-
 
     const handlePost = async (e) => {
         e.preventDefault();
@@ -47,10 +44,12 @@ const NewPost = (props) =>{
             title,
             
         }
+
         let response = await fetch('/api/posts', {
             method: 'POST',
             body: JSON.stringify(newPost)
         });
+
         let data = await response.json();
 
         if(data){
@@ -63,14 +62,12 @@ const NewPost = (props) =>{
         }else{
             return setFlashError("An Error has occured");
         }
-
     }
 
 
     return (
     <div className="h-screen w-screen flex flex-col justify-center items-center">
         <h1 className='mb-3 text-3xl underline'> New Post</h1>
-
         <div className='container w-3/4'>
             <Flash body={flashSuccess} />
             {flashError && <FlashError body={flashError} />}

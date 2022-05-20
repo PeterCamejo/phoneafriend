@@ -1,13 +1,8 @@
-import {useState, useEffect} from 'react'
+import {useState} from 'react'
 import {useRouter} from 'next/router'
-import Link from 'next/link'
 import Flash from '../../../components/flash/Flash';
 import FlashError from '../../../components/flash/FlashError';
-import {FiArrowLeft} from 'react-icons/fi'
-import { connect } from 'mongoose';
 import connectDB from '../../../lib/mongodb';
-
-
 
 const EditPost = (props) => { 
     const router = useRouter();
@@ -84,7 +79,7 @@ const EditPost = (props) => {
             <div className='container w-3/4'>
                 <Flash body={flashSuccess} />
                 {flashError && <FlashError body={flashError} />}
-                <div className="container p-3 rounded-md flex border-black border-2 border-solid ">
+                <div className="container p-3 rounded-md flex border-2 border-solid ">
                     <form className="w-full" onSubmit={handleUpdate}>
                             <div className="mb-3">
                                 <label>Title</label>

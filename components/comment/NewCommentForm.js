@@ -14,7 +14,6 @@ const NewCommentForm = (props) =>{
     const handleSubmit = async (e) =>{
         e.preventDefault();
 
-
         if(!body){
             return setPageFlash("Comment can't be empty", true);
         }
@@ -28,7 +27,6 @@ const NewCommentForm = (props) =>{
             postId: props.postId
         }
 
-
         let response = await fetch(`/api/posts/${props.postId}/comments`, {
             method:'POST',
             body: JSON.stringify(reqBody)
@@ -40,12 +38,6 @@ const NewCommentForm = (props) =>{
             setBody("");
             addComment(data.data);
         }
-        //     return setPageFlash("Comment posted!", false);
-        // // }else{
-        //     return setPageFlash("An Error has occured.", true);
-        // }
-
-
 
         return;
     }

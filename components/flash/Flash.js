@@ -11,8 +11,6 @@ const Flash = (props) =>{
     }
 
     if(body){
-
-        
             return(
                 <div className="mb-3 p-3 w-full flex justify-between items-center bg-flashGreen">
                     <p>{body}</p>
