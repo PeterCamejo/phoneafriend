@@ -1,9 +1,7 @@
 import session from '../../../lib/middlewares/session'
 import passport from '../../../lib/passport'
-import {nextCOptions} from '../../../lib/nextConnectOptions'
-import catchAsync from '../../../utils/catchAsync';
+import nextCOptions from '../../../lib/nextConnectOptions'
 import nc from 'next-connect'
-import connectDB from '../../../lib/mongodb';
 
 const handler = nc(nextCOptions);
 

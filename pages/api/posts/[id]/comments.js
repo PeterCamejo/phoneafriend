@@ -1,4 +1,3 @@
-import connectDB from "../../../../lib/mongodb";
 import Post from "../../../../models/Post"
 import Comment from "../../../../models/Comment"
 
