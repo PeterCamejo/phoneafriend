@@ -12,16 +12,16 @@ handler.use(session);
 handler.use(passport.initialize());
 handler.use(passport.session());
 
-(async () =>{
-    try{
-        await connectDB();
-        return
-    }catch(e){
-        console.log("Error connecting DB for login", e);
-    }
-    return
-}
-)
+// (async () =>{
+//     try{
+//         await connectDB();
+//         return
+//     }catch(e){
+//         console.log("Error connecting DB for login", e);
+//     }
+//     return
+// }
+// )
 
 handler.post(
     passport.authenticate('local'),

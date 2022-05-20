@@ -1,6 +1,7 @@
 import {useState} from 'react'
 import {useRouter} from 'next/router'
 import FlashError from '../../components/flash/FlashError';
+import connectDB from '../../lib/mongodb';
 
 const Register = () => {
 
@@ -96,7 +97,7 @@ export default Register
 
 export async function getServerSideProps(context) {
     await connectDB();
-    
+
     let flash = ""
     let flashError = ""
     

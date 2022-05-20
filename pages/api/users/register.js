@@ -17,7 +17,7 @@ handler.use(passport.session());
 handler.post(
         catchAsync(
             async(req,res)=>{
-                await connectDB();
+                // await connectDB();
                 let{username, email, password} = JSON.parse(req.body);
                 const user = new User({email,username});
                 const registeredUser = await User.register(user,password, function(err) {

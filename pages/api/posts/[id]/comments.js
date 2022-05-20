@@ -6,7 +6,7 @@ import Comment from "../../../../models/Comment"
 export default async function handler(req,res){
     const {method} = req;
     
-    await connectDB()
+    
 
     switch(method){
         case 'GET':
