@@ -1,6 +1,6 @@
 import session from '../../lib/middlewares/session';
 import passport from '../../lib/passport'
-import {nextCOptions} from '../../lib/nextConnectOptions'
+import nextCOptions from '../../lib/nextConnectOptions'
 import nc from 'next-connect'
 
 const handler = nc(nextCOptions);

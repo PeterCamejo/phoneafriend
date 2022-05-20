@@ -20,11 +20,11 @@ function ShowPost(props) {
     const [post,  setPost] = useState(props.post);
 
    const isAuthor = ()=> {
-            if(user || loading){
-                if(post.author === user._id){
-                    return true;
+            if((user || loading) && user !== undefined){
+                        if(post.author === user._id){
+                            return true;
+                        }
                 }
-            }
 
             return false;
     }
