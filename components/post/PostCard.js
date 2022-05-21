@@ -13,7 +13,7 @@ const PostCard = (props) =>{
         if(data){
             setAuthor(data.user);
         }
-    })
+    },[data]);
 
     return(
         <Link href={{pathname: `/posts/${encodeURIComponent(post._id)}`, 

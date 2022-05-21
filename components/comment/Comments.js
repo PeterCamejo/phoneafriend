@@ -1,13 +1,14 @@
 import {useState,useCallback} from 'react'
 import NewCommentForm from "./NewCommentForm"
 import Comment from "./Comment"
+import { useUser } from '../../lib/hooks'
 
 
 
 
 const Comments = (props) =>{
     const [comments, setComments] = useState(props.comments);
-    const setPageFlash = props.setPageFlash;
+    const [user, {loading}] = useUser();
 
     //Force an update to fix addComment only triggering one update call,
     //but not updating on successive calls.
@@ -27,14 +28,15 @@ const Comments = (props) =>{
 
     return(
         <div className="w-full flex flex-col justify-center items-center">
-            <NewCommentForm postId={props.postId} 
-                            setPageFlash={setPageFlash}
-                            addComment={addComment}
-            />
+            <h4 className="font-semibold underline self-start mb-3">Comments:</h4>
+            {(user || loading) &&
+                <NewCommentForm postId={props.postId} 
+                                addComment={addComment}
+                />
+            }   
             {comments.map((comment, index) => {
                 return(
                     <Comment comment={comment} 
-                             setPageFlash={setPageFlash} 
                              postId={props.postId}
                              deleteComment={deleteComment} 
                              key={index} 

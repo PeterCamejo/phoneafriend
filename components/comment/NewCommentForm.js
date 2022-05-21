@@ -1,8 +1,10 @@
 import {useState} from 'react'
+import {useRouter} from 'next/router'
 
 const NewCommentForm = (props) =>{
 
     const [body , setBody] = useState("");
+    const router = useRouter();
 
     const setPageFlash = props.setPageFlash;
     const addComment = props.addComment
@@ -31,6 +33,25 @@ const NewCommentForm = (props) =>{
         let data = await response.json();
 
         if(data){
+            //failed isLoggedIn middleware
+            if(data.notLoggedIn){
+                return router.push({    
+                    pathname: `/users/login`,
+                    query: {
+                        flashError : 'Need to be logged in for that'
+                    }
+                })
+            }
+            //failed isPostAuthor middleware
+            // if(data.notAuthor){
+            //     return router.push({    
+            //         pathname: '/',
+            //         query: {
+            //             flashError : 'You are not the author.'
+            //         }
+            //     })
+            // }
+
             setBody("");
             addComment(data.data);
         }
