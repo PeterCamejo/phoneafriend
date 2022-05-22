@@ -16,7 +16,8 @@ Tutor Sessions
 Authorization for author components and actions for Posts (edit/delete only doable by post's author) TODO: Fix flash wonkiness  
 User Registration/Login/Logout w/ next-session and passport (TODO: Set user to automatically login after register)  
 Navbar(TODO: Mobile view);      
-Posts CRUD without Auth    
 Basic flash messages and errors for posts.    
-Add and Delete comments to Posts without Auth    
+Posts CRUD with Auth  
+Comment Create/Delete with Auth  
+
  
