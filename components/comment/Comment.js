@@ -4,6 +4,7 @@ import { fetcherFn } from "../../lib/hooks";
 import {useState, useEffect} from 'react';
 import { useUser } from '../../lib/hooks';
 import Rating from '../Rating';
+import handleMiddlewareResponse from '../../lib/middlewares/handleMiddlewareResponse';
 
 const Comment = (props) =>{
 
@@ -39,40 +40,49 @@ const Comment = (props) =>{
             method: 'DELETE',
             body: JSON.stringify(reqBody)
         });
-        let data = await response.json();
+        let resdata = await response.json();
 
-        if(data){
-            //failed isLoggedIn middleware
-            if(data.notLoggedIn){
-                return router.push({    
-                    pathname: `/users/login`,
-                    query: {
-                        flashError : 'Need to be logged in for that'
-                    }
-                })
-            }
-            //failed isCommentAuthor middleware
-            if(data.notAuthor){
-                return router.push({    
-                    pathname: '/',
-                    query: {
-                        flashError : 'You are not the author.'
-                    }
-                })
-            }
-
+        if(resdata){
+        
+            handleMiddlewareResponse(router, resdata);
             deleteComment(props.comment);
         }
         
         return
     }
 
-    const incrementRating = () =>{
-        console.log('increment rating in db');
+    const incrementRating = async () =>{
+        const body = {
+            commentId: props.comment._id
+        }
+
+        let response = await fetch('/api/comments/upvote', {
+            method: 'PUT',
+            body: JSON.stringify(body)
+        });
+
+        let resdata = await response.json();
+        if(resdata){
+            handleMiddlewareResponse(router, resdata);
+        }
+        return;
     }
 
-    const decrementRating = () =>{
-        console.log('decrement rating in db');
+    const  decrementRating = async () =>{
+        const body = {
+            commentId: props.comment._id
+        }
+
+        let response = await fetch('/api/comments/downvote',{
+            method: 'PUT',
+            body: JSON.stringify(body)
+        })
+
+        let resdata = await response.json();
+        if(resdata){
+            handleMiddlewareResponse(router, resdata);
+        }
+        return;
     }
 
     return(

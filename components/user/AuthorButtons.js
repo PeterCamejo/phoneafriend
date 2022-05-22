@@ -1,7 +1,7 @@
-import { useState } from "react"
 import { useRouter } from "next/router"
 import Link from 'next/link'
 import {FaTrashAlt, FaEdit} from 'react-icons/fa'
+import handleMiddlewareResponse from "../../lib/middlewares/handleMiddlewareResponse"
  
 const AuthorButtons = (props) => {
     const router = useRouter();
@@ -16,24 +16,8 @@ const AuthorButtons = (props) => {
         let data = await response.json();
 
         if(data){
-            //failed isLoggedIn middleware
-            if(data.notLoggedIn){
-                return router.push({    
-                    pathname: `/users/login`,
-                    query: {
-                        flashError : 'Need to be logged in for that'
-                    }
-                })
-            }
-            //failed isPostAuthor middleware
-            if(data.notAuthor){
-                return router.push({    
-                    pathname: '/',
-                    query: {
-                        flashError : 'You are not the author.'
-                    }
-                })
-            }
+            
+            handleMiddlewareResponse(router, data);
 
             router.push({
                                 pathname:"/",

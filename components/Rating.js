@@ -48,11 +48,17 @@ const Rating = (props) =>{
 
     return(
         <div className='flex flex-row space-x-2'>
-            <FaArrowAltCircleUp className='text-pafGreen text-3xl' onClick={increment} />
+            {upvoted ?
+            <FaArrowAltCircleUp className='text-pafGreen text-3xl' onClick={increment} /> :
+            <FaArrowAltCircleUp className='text-slate-300 text-3xl' onClick={increment} />
+            }   
             <div className='text-xl'>
                 {rating}
             </div>
-            <FaArrowAltCircleDown className='text-pafGreen text-3xl' onClick={decrement} />
+            {downvoted ? 
+            <FaArrowAltCircleDown className='text-pafGreen text-3xl' onClick={decrement} /> :
+            <FaArrowAltCircleDown className='text-slate-300 text-3xl' onClick={decrement} />
+            }
         </div>
     )
 }

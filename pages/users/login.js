@@ -20,12 +20,7 @@ const Login = (props) =>{
         if(!username || !password ){
             setFlashError("All fields required");
         }
-
-        let user = {
-            username,
-            password
-        }
-
+        
         let response = await fetch('/api/users/login',{
             method:'POST',
             headers: { 'Content-Type': 'application/json' },

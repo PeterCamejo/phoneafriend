@@ -23,3 +23,15 @@ export async function deleteComment(req){
                 await Comment.findByIdAndDelete(commentId);
                 return
 }
+
+export async function incrementCommentRating(req){
+        const {commentId} = JSON.parse(req.body);
+        await Comment.findByIdAndUpdate(commentId, {$inc:{ rating: 1}});
+        return;
+}
+
+export async function decrementCommentRating(req){
+        const {commentId} = JSON.parse(req.body);
+        await Comment.findByIdAndUpdate(commentId, {$inc:{ rating: -1 }});
+        return;
+}

@@ -3,6 +3,7 @@ import {useRouter} from 'next/router'
 import Flash from '../../../components/flash/Flash';
 import FlashError from '../../../components/flash/FlashError';
 import connectDB from '../../../lib/mongodb';
+import handleMiddlewareResponse from '../../../lib/middlewares/handleMiddlewareResponse';
 
 const EditPost = (props) => { 
     const router = useRouter();
@@ -37,24 +38,8 @@ const EditPost = (props) => {
         const data = await response.json();
 
         if(data){
-            //failed isLoggedIn middleware
-            if(data.notLoggedIn){
-                return router.push({    
-                    pathname: `/users/login`,
-                    query: {
-                        flashError : 'Need to be logged in for that'
-                    }
-                })
-            }
-            //failed isPostAuthor middleware
-            if(data.notAuthor){
-                return router.push({    
-                    pathname: '/',
-                    query: {
-                        flashError : 'You are not the author.'
-                    }
-                })
-            }
+            
+            handleMiddlewareResponse(router, data);
 
             setTitle('');
             setBody('');
