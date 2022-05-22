@@ -6,8 +6,7 @@ Phone-a-Friend is an application wherein users can ask and answer questions in a
   
 
 **What's next for PhoneAFriend:  **  
-Post and Comment form validation middleware w/ joi  
-Comment authorization for author deleting comments.  
+Post and Comment form validation middleware w/ joi   
 Fix Flash messages  
 Update and work on styling    
 Tutor Sessions  
