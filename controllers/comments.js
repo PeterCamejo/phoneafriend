@@ -7,6 +7,7 @@ export async function createComment(req){
                 const post = await Post.findById(body.postId);
                 const newComment = {
                     body: body.comment.body,
+                    rating: 1,
                     author: req.user._id
                 }
                 const comment = new Comment(newComment);          

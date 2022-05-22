@@ -42,15 +42,15 @@ const NewCommentForm = (props) =>{
                     }
                 })
             }
-            //failed isPostAuthor middleware
-            // if(data.notAuthor){
-            //     return router.push({    
-            //         pathname: '/',
-            //         query: {
-            //             flashError : 'You are not the author.'
-            //         }
-            //     })
-            // }
+            //failed isCommentAuthor middleware
+            if(data.notAuthor){
+                return router.push({    
+                    pathname: '/',
+                    query: {
+                        flashError : 'You are not the author.'
+                    }
+                })
+            }
 
             setBody("");
             addComment(data.data);

@@ -1,5 +1,3 @@
-import Head from 'next/head'
-import Link from 'next/link'
 import PostCard from '../components/post/PostCard'
 import Flash from '../components/flash/Flash'
 import FlashError from '../components/flash/FlashError'

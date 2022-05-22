@@ -34,15 +34,17 @@ const Comments = (props) =>{
                                 addComment={addComment}
                 />
             }   
-            {comments.map((comment, index) => {
-                return(
-                    <Comment comment={comment} 
-                             postId={props.postId}
-                             deleteComment={deleteComment} 
-                             key={index} 
-                    />
-                )
-            })}
+            <div className='container border-2 rounded-md border-solid'>
+                {comments.map((comment, index) => {
+                    return(
+                        <Comment comment={comment} 
+                                postId={props.postId}
+                                deleteComment={deleteComment} 
+                                key={index} 
+                        />
+                    )
+                })}
+            </div>
         </div>
     )
 }
