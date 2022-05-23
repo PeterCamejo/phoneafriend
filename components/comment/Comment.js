@@ -12,6 +12,8 @@ const Comment = (props) =>{
     const router = useRouter();
     const {data} = useSWR(`/api/users/${props.comment.author}`, fetcherFn);
     const [author, setAuthor] = useState('');
+    const [upvoted, setUpvoted] = useState(false);
+    const [downvoted, setDownvoted] = useState(false);
     const [user , {loading}] = useUser();
 
     useEffect(()=>{
@@ -43,7 +45,6 @@ const Comment = (props) =>{
         let resdata = await response.json();
 
         if(resdata){
-        
             handleMiddlewareResponse(router, resdata);
             deleteComment(props.comment);
         }
@@ -51,30 +52,51 @@ const Comment = (props) =>{
         return
     }
 
-    const incrementRating = async () =>{
+    const saveDownvote = async()=>{
+        //Save vote for this comment in current user model
         const body = {
-            commentId: props.comment._id
+            commentId: props.comment._id,
+            vote: -1
         }
 
-        let response = await fetch('/api/comments/upvote', {
+        const response = await fetch(`/api/users/${user._id}/votedComments`,{
             method: 'PUT',
-            body: JSON.stringify(body)
-        });
+            body:JSON.stringify(body)
+        })
 
-        let resdata = await response.json();
+        const resdata = await response.json();
         if(resdata){
             handleMiddlewareResponse(router, resdata);
         }
-        return;
     }
 
-    const  decrementRating = async () =>{
+    const saveUpvote = async()=>{
+        //Save vote for this comment in current user model
+        const body = {
+            commentId: props.comment._id,
+            vote: 1
+        }
+
+        const response = await fetch(`/api/users/${user._id}/votedComments`,{
+            method: 'PUT',
+            body:JSON.stringify(body)
+        })
+
+        const resdata = await response.json();
+        if(resdata){
+            handleMiddlewareResponse(router, resdata);
+        }
+    }
+
+    const removeVote = async() =>{
+        //Remove vote for this comment from the current user model
+
         const body = {
             commentId: props.comment._id
         }
 
-        let response = await fetch('/api/comments/downvote',{
-            method: 'PUT',
+        let response = await fetch(`/api/users/${user._id}/votedComments`,{
+            method: 'DELETE',
             body: JSON.stringify(body)
         })
 
@@ -82,6 +104,48 @@ const Comment = (props) =>{
         if(resdata){
             handleMiddlewareResponse(router, resdata);
         }
+    }
+    const incrementRating = async () =>{
+
+        //Increment rating in the comment model
+        const body = {
+            commentId: props.comment._id
+        }
+
+        let response = await fetch('/api/comments/votes', {
+            method: 'POST',
+            body: JSON.stringify(body)
+        });
+
+        let resdata = await response.json();
+        if(resdata){
+            handleMiddlewareResponse(router, resdata);
+        }
+
+        saveUpvote();
+
+        return;
+    }
+
+    const  decrementRating = async () =>{
+        
+        //Decrement rating in the comment model
+        const body = {
+            commentId: props.comment._id
+        }
+
+        let response = await fetch('/api/comments/votes',{
+            method: 'DELETE',
+            body: JSON.stringify(body)
+        })
+
+        let resdata = await response.json();
+        if(resdata){
+            handleMiddlewareResponse(router, resdata);
+        }
+
+        saveDownvote();
+
         return;
     }
 

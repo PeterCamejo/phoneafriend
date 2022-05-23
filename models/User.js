@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'
+import mongoose, { Schema } from 'mongoose'
 const passportLocalMongoose = require('passport-local-mongoose');
 
 const UserSchema = new mongoose.Schema({ 
@@ -6,7 +6,21 @@ const UserSchema = new mongoose.Schema({
             type:String,
             required: true,
             unique: true
-        }
+        },
+
+        votedComments:[{
+                comment:{
+                    type: Schema.Types.ObjectId, 
+                    ref: 'Comment',
+                    required: true,
+                    unique: true,
+                },
+                vote:{
+                    type: Number, 
+                    enum: [1, -1],
+                    required:true
+                }
+        }]
 });
 
 UserSchema.plugin(passportLocalMongoose);
