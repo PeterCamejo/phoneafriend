@@ -1,6 +1,7 @@
 import PostCard from '../components/post/PostCard'
 import Flash from '../components/flash/Flash'
 import FlashError from '../components/flash/FlashError'
+import Link from 'next/link'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import useSWR from 'swr'
@@ -26,7 +27,7 @@ export default function Home(props) {
           <p>Thanks for checking up on this project&apos;s progress!</p>
           <p>Remember to check out the <a className='text-sky-400 underline' href="https://github.com/PeterCamejo/phoneafriend"> Github repo</a> to see what features I&apos;ve already implemented and the features I&apos;m currently working on.</p>
 
-          <p className='mt-6 font-semibold text-lg'><a className="text-sky-400 underline" href="/users/register">Register</a> an account to play with the app!</p>
+          <p className='mt-6 font-semibold text-lg'><span className="text-sky-400 underline"><Link href="/users/register">Register</Link></span> an account to play with the app!</p>
       </div>
       <div className='container h-2/3'>
           <div className="container  mb-3">
