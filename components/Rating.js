@@ -16,15 +16,12 @@ const Rating = (props) =>{
             if(downvoted){
                 setDownvoted(false);
                 ++newRating;
-                //incrementRating();
             }
             setUpvoted(true);
             setRating(++newRating);
-            //incrementRating();
         }else{
             setUpvoted(false);
             setRating(rating-1);
-            //decrementRating();
         }
     }
 
@@ -35,15 +32,12 @@ const Rating = (props) =>{
             if(upvoted){
                 setUpvoted(false);
                 --newRating;
-                //decrementRating();
             }
             setDownvoted(true);
             setRating(--newRating);
-            //decrementRating();
         }else{
             setDownvoted(false);
             setRating(rating+1);
-            //incrementRating();
         }
 
     }

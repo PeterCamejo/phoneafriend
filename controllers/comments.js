@@ -71,11 +71,11 @@ export async function removeCommentVoteInUser(req){
         currentUser.votedComments.map(votedcomment =>{
                 if(votedcomment.comment.equals(commentId)){
                         commentToRemove = votedcomment;
+                        console.log('vote to be removed found');
                 }
         })
 
         await currentUser.votedComments.pull({_id: commentToRemove._id});
         await currentUser.save();
-       
         return;
 }

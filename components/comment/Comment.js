@@ -22,10 +22,10 @@ const Comment = (props) =>{
             setAuthor(data.user);
         }
 
+        //Checking to see if user has voted on this comment
         if(user){
-            const match = user.votedComments.some( votedComment => votedComment['comment'] === props.comment._id);
+            const match = user.votedComments.find( votedComment => votedComment['comment'] === props.comment._id);
             if(match){
-                console.log('match');
                 setVoted(true);
                 setUpvoted(match.vote > 0);
                 setDownvoted(match.vote < 0);
@@ -43,18 +43,6 @@ const Comment = (props) =>{
                         return true;
                     }
             }
-
-        return false;
-    }
-
-    const hasVoted = () => {
-        if(user){
-            const match = user.votedComments.some( votedComment => votedComment['comment'] === props.comment._id);
-            if(match){
-                setUpvoted(match.co)
-            }
-            return match;
-        }
 
         return false;
     }
@@ -150,8 +138,6 @@ const Comment = (props) =>{
             handleMiddlewareResponse(router, resdata);
         }
 
-        saveUpvote();
-
         return;
     }
 
@@ -172,10 +158,7 @@ const Comment = (props) =>{
             handleMiddlewareResponse(router, resdata);
         }
 
-        saveDownvote();
-
         return;
-
     }
 
     const upvoteMethod = async () =>{
@@ -187,6 +170,7 @@ const Comment = (props) =>{
         }
         if(downvoted){
             setDownvoted(false);
+            await incrementRating();
         }
 
         setUpvoted(true);
@@ -204,6 +188,7 @@ const Comment = (props) =>{
         }
         if(upvoted){
             setUpvoted(false);
+            await decrementRating();
         }
 
         setDownvoted(true);
@@ -216,18 +201,20 @@ const Comment = (props) =>{
         <div className="container p-3 shadow-lg flex flex-row justify-between w-full cursor-pointer">
             <div className='h-100 flex flex-row space-x-5'>
                 <div className='flex flex-col h-full justify-center align-center'>
-                    {voted ?                     
+                    {voted &&                   
                         <Rating rating={props.comment.rating}
                             upvoteMethod = {upvoteMethod}
                             downvoteMethod = {downvoteMethod}
                             upvoted={upvoted}
                             downvoted={downvoted}  
-                        /> :
+                        />
+                    }
+                    {!voted && 
                         <Rating rating={props.comment.rating}
                         upvoteMethod = {upvoteMethod}
                         downvoteMethod = {downvoteMethod}
-                        upvoted={upvoted}
-                        downvoted={downvoted}  
+                        upvoted={false}
+                        downvoted={false}  
                         />
                     }
                 </div>
