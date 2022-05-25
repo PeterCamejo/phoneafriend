@@ -4,44 +4,46 @@ import {FaArrowAltCircleUp, FaArrowAltCircleDown} from 'react-icons/fa';
 const Rating = (props) =>{
 
     const [rating, setRating] = useState(props.rating);
-    const [upvoted , setUpvoted] = useState(false);
-    const [downvoted, setDownvoted] = useState(false);
-    const incrementRating = props.incrementRating;
-    const decrementRating = props.decrementRating;
+    const [upvoted , setUpvoted] = useState(props.upvoted);
+    const [downvoted, setDownvoted] = useState(props.downvoted);
+    const upvoteMethod = props.upvoteMethod;
+    const downvoteMethod = props.downvoteMethod;
 
     const increment = ()=>{
+        upvoteMethod();
         let newRating = rating;
         if(!upvoted){
             if(downvoted){
                 setDownvoted(false);
                 ++newRating;
-                incrementRating();
+                //incrementRating();
             }
             setUpvoted(true);
             setRating(++newRating);
-            incrementRating();
+            //incrementRating();
         }else{
             setUpvoted(false);
             setRating(rating-1);
-            decrementRating();
+            //decrementRating();
         }
     }
 
     const decrement = ()=>{
+        downvoteMethod();
         let newRating = rating;
         if(!downvoted){
             if(upvoted){
                 setUpvoted(false);
                 --newRating;
-                decrementRating();
+                //decrementRating();
             }
             setDownvoted(true);
             setRating(--newRating);
-            decrementRating();
+            //decrementRating();
         }else{
             setDownvoted(false);
             setRating(rating+1);
-            incrementRating();
+            //incrementRating();
         }
 
     }
