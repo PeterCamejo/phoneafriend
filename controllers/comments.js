@@ -71,7 +71,6 @@ export async function removeCommentVoteInUser(req){
         currentUser.votedComments.map(votedcomment =>{
                 if(votedcomment.comment.equals(commentId)){
                         commentToRemove = votedcomment;
-                        console.log('vote to be removed found');
                 }
         })
 
