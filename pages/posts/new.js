@@ -39,10 +39,8 @@ const NewPost = (props) =>{
         }
         
         let newPost = {
-            author: user._id,
             body,
             title,
-            
         }
 
         let response = await fetch('/api/posts', {

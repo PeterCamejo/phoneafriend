@@ -3,6 +3,7 @@ import passport from '../../lib/passport'
 import nextCOptions from '../../lib/nextConnectOptions'
 import nc from 'next-connect'
 import {isLoggedIn, isPostAuthor} from '../../lib/middlewares/user'
+import {validatePost} from '../../lib/middlewares/joiValidation'
 import catchAsync from '../../utils/catchAsync'
 import {getPostIndex, createPost, updatePost, deletePost} from '../../controllers/posts'
 
@@ -19,7 +20,7 @@ handler.get(catchAsync(async(req, res) =>{
                 res.status(200).json({success: true , data: posts})
 }))
 
-handler.use(isLoggedIn).post(catchAsync(async (req, res) =>{
+handler.post(isLoggedIn, validatePost, catchAsync(async (req, res) =>{
                 try{
                     await createPost(req);
                     res.status(201).json({success: true, data: "Successfully posted!"})
@@ -27,10 +28,9 @@ handler.use(isLoggedIn).post(catchAsync(async (req, res) =>{
                     res.status(400).json({success:false});
                 }
                 
-                
 }))
 
-handler.use(isLoggedIn).use(isPostAuthor).put(catchAsync(async (req, res)=>{
+handler.put(isLoggedIn, isPostAuthor, validatePost, catchAsync(async (req, res)=>{
                 try{   
                     await updatePost(req);
                     res.status(200).json({success:true, data:'Successfully updated!'})
@@ -39,7 +39,7 @@ handler.use(isLoggedIn).use(isPostAuthor).put(catchAsync(async (req, res)=>{
                 }
 }))
 
-handler.use(isLoggedIn).use(isPostAuthor).delete(catchAsync(async(req,res)=>{
+handler.delete(isLoggedIn, isPostAuthor, catchAsync(async(req,res)=>{
             try{
                 await deletePost(req);
                 res.status(200).json({success:true, data:"Successfully deleted."})

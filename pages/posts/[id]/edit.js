@@ -39,7 +39,7 @@ const EditPost = (props) => {
 
         if(data){
             
-            handleMiddlewareResponse(router, data);
+            await handleMiddlewareResponse(router, data);
 
             setTitle('');
             setBody('');

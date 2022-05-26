@@ -31,7 +31,7 @@ const Login = (props) =>{
         })
         
         if(response.status === 401){
-            router.push({
+            await router.push({
                 pathname: '/users/login',
                 query:{
                     flashError: 'Incorrect credentials'
@@ -44,13 +44,13 @@ const Login = (props) =>{
             let data = await response.json();
 
             if(data){
-            router.push({
+            await router.push({
                     pathname: '/',
                     query: {
                         flash:data.data
                     }
                 });
-                router.reload();
+                return router.reload();
             }else{
                 return setFlashError("Failed to login!");
             }

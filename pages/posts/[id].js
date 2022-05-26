@@ -57,7 +57,7 @@ export async function getServerSideProps(context) {
     await connectDB();
 
     try{
-        post = await Post.findById(context.query.postId).populate('comments').populate('author');
+        post = await Post.findById(context.params.id).populate('comments').populate('author');
         author = post.author;
         comments = post.comments;
         post = {

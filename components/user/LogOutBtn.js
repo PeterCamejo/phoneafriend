@@ -14,7 +14,7 @@
         let data = await response.json();
 
         if(data){
-           router.replace({
+           await router.replace({
                 pathname: '/',
                 query:{
                     flash: data.data

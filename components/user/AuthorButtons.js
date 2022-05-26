@@ -19,7 +19,7 @@ const AuthorButtons = (props) => {
             
             handleMiddlewareResponse(router, data);
 
-            router.push({
+            await router.push({
                                 pathname:"/",
                                 query: { flash : data.data },
             });
