@@ -52,6 +52,8 @@ export default function Home(props) {
 export async function getServerSideProps(context) {
   await connectDB();
 
+  console.log(context.req);
+
   let flash = ""
   let flashError = ""
   

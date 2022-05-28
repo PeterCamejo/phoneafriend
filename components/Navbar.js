@@ -40,6 +40,8 @@ const Navbar = () => {
             <div className="flex flex-row justify-end space-x-4 w-1/2">
                 {(!user && !loading) && <Link href="/users/login">Login</Link> }
                 {(!user && !loading) && <Link href="/users/register">Register</Link>}
+                {user && <Link href={`/users/${user.username}`}>View Profile</Link>}
+                {user && <Link href={'/users/edit'}>Edit Profile</Link>}
                  {(user || loading) && <LogOutBtn handleLogout={handleLogout} />}
             </div>
         </div>

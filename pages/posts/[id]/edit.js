@@ -12,6 +12,17 @@ const EditPost = (props) => {
     const [flashError , setFlashError] = useState("");
     const [flashSuccess, setFlashSuccess] = useState("");
 
+    useEffect(()=>{
+        if(!loading && !user){
+            router.replace({
+                pathname:'/users/login',
+                query:{
+                    flashError:'Need to login for that!'
+                }
+        });
+        }
+    }, [user, loading]);
+
     const handleUpdate = async (e) =>{
         e.preventDefault();
 
