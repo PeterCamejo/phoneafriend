@@ -18,7 +18,7 @@ const Navbar = () => {
         let data = await response.json();
 
         if(data){
-            router.push({
+            await router.push({
                 pathname: '/',
                 query:{
                     flash: data.data

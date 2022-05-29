@@ -1,9 +1,10 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import {useRouter} from 'next/router'
 import Flash from '../../../components/flash/Flash';
 import FlashError from '../../../components/flash/FlashError';
 import connectDB from '../../../lib/mongodb';
 import handleMiddlewareResponse from '../../../lib/middlewares/handleMiddlewareResponse';
+import {useUser} from '../../../lib/hooks'
 
 const EditPost = (props) => { 
     const router = useRouter();
@@ -11,6 +12,7 @@ const EditPost = (props) => {
     const [body,  setBody] = useState(props.post.body);
     const [flashError , setFlashError] = useState("");
     const [flashSuccess, setFlashSuccess] = useState("");
+    const [user, {loading}] = useUser();
 
     useEffect(()=>{
         if(!loading && !user){
@@ -72,7 +74,7 @@ const EditPost = (props) => {
     return(
         <div className="h-screen w-screen flex flex-col justify-center items-center">
             <h1 className='underline mb-3 text-3xl'>Edit Post</h1>
-            <div className='container w-3/4'>
+            <div className='container xl:w-1/3 xl:h-1/3'>
                 <Flash body={flashSuccess} />
                 {flashError && <FlashError body={flashError} />}
                 <div className="container p-3 rounded-md flex border-2 border-solid ">

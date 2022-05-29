@@ -8,9 +8,6 @@ import Post from "../../models/Post"
 import connectDB from "../../lib/mongodb";
 import {useUser} from '../../lib/hooks'
 
-import useSWR from 'swr'
-import { fetcherFn } from '../../lib/hooks'
-
 function ShowPost(props) {
     const [flashError , setFlashError] = useState('');
     const [flashSuccess, setFlashSuccess] = useState(props.flash);
@@ -30,7 +27,7 @@ function ShowPost(props) {
 
     return(
         <div className="flex flex-col p-5 items-center h-screen w-screen">
-            <div className="container h-1/2 flex flex-col justify-center">
+            <div className="container xl:w-1/3 xl:h-1/3 flex flex-col justify-center">
                 <div className="container">
                     {flashSuccess && <Flash body={flashSuccess} /> }
                     {flashError && <FlashError body={flashError} /> }
@@ -38,7 +35,7 @@ function ShowPost(props) {
                 <PostBody post={props.post} author={props.author} /> 
                 {isAuthor() && <AuthorButtons post={props.post} /> }
             </div>
-            <div className="container h-1/2">
+            <div className="container xl:w-1/3 xl:h-1/3">
                 <Comments postId={props.post._id} comments={props.comments ? props.comments : ""}/>
             </div>
         </div>

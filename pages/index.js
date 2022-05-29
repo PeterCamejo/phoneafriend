@@ -23,13 +23,13 @@ export default function Home(props) {
   
   return (
     <div className='h-screen w-screen p-6 flex flex-col items-center justify-center'> 
-      <div className='container flex flex-col justify-center h-1/3'>
+      <div className='container flex flex-col justify-center md:w-1/3 md:h-1/3'>
           <p>Thanks for checking up on this project&apos;s progress!</p>
           <p>Remember to check out the <a className='text-sky-400 underline' href="https://github.com/PeterCamejo/phoneafriend"> Github repo</a> to see what features I&apos;ve already implemented and the features I&apos;m currently working on.</p>
 
           <p className='mt-6 font-semibold text-lg'><span className="text-sky-400 underline"><Link href="/users/register">Register</Link></span> an account to play with the app!</p>
       </div>
-      <div className='container h-2/3'>
+      <div className='container md:w-1/3 md:h-1/3'>
           <div className="container  mb-3">
             {flashSuccess && <Flash body={flashSuccess} />}
             {flashError && <FlashError body={flashError}/>} 
@@ -52,7 +52,6 @@ export default function Home(props) {
 export async function getServerSideProps(context) {
   await connectDB();
 
-  console.log(context.req);
 
   let flash = ""
   let flashError = ""

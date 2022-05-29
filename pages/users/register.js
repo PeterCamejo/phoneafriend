@@ -48,7 +48,7 @@ const Register = () => {
     return (
         <div className='h-screen w-screen flex flex-col justify-center items-center'>
             <h1 className='mb-3 text-3xl underline'> Register</h1>
-            <div className='container w-3/4'>
+            <div className='container xl:w-1/3 xl:h-1/3'>
                 {/*Flash Stuff */}
                 {flashError && <FlashError body={flashError} />}
                 <div className='container p-3 flex rounded-md border-solid border-2'>

@@ -33,7 +33,8 @@ const Comments = (props) =>{
                 <NewCommentForm postId={props.postId} 
                                 addComment={addComment}
                 />
-            }   
+            }
+            {!comments.length && <h4 className='mt-3'>No comments yet!</h4>}
             <div className='container border-2 rounded-md border-solid'>
                 {comments.map((comment, index) => {
                     return(
