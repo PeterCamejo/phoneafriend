@@ -2,7 +2,7 @@ import { fetcherFn  } from "../../lib/hooks"
 import useSWR from "swr";
 import {useEffect, useState} from 'react'
 import connectDB from "../../lib/mongodb";
-import User from '../../models/User'
+import {getUserByUsername} from "../../controllers/users"
 import PostCard from "../../components/post/PostCard";
 
 const ViewProfile = (props) =>{
@@ -39,7 +39,8 @@ export default ViewProfile
 export async function getServerSideProps(context) {
     await connectDB();
 
-    const user = await User.find({username:context.params.username});
+    const user = await getUserByUsername(context.params.username);
+
 
     // let flash = ""
     // let flashError = ""

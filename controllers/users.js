@@ -10,3 +10,7 @@ export async function getUserPosts(userId){
     const posts = await Post.find({author:userId});
     return posts;
 }
+
+export async function getUserByUsername(username){
+    return await User.find({username:username});
+}
