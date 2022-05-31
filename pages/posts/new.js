@@ -1,11 +1,8 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import {useRouter} from 'next/router'
-import Link from 'next/link'
 import Flash from '../../components/flash/Flash'
 import FlashError from '../../components/flash/FlashError'
-import {FiArrowLeft} from 'react-icons/fi'
 import {useUser} from '../../lib/hooks'
-import { useEffect } from 'react'
 import connectDB from '../../lib/mongodb'
 
 
@@ -13,8 +10,8 @@ const NewPost = (props) =>{
     const router = useRouter();
     const[title ,setTitle] = useState('');
     const[body, setBody] = useState('');
-    const[flashError, setFlashError] = useState('');
-    const[flashSuccess, setFlashSuccess] = useState('');
+    const[flashError, setFlashError] = useState(props.flashError);
+    const[flashSuccess, setFlashSuccess] = useState(props.flash);
     const[user, {loading}] = useUser();
 
     useEffect(()=>{
